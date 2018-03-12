@@ -1,4 +1,4 @@
 package com.company;
 
-public class Coche {
+public class Usuario {
 }

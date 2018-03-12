@@ -1,4 +1,4 @@
 package com.company;
 
-public class isma {
+public class Registro {
 }
