@@ -1,5 +1,5 @@
 package com.company.view.screens;
 
-public class Acceso {
+public class Donar {
 
 }

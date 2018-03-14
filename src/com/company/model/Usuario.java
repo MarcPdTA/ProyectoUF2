@@ -1,4 +1,4 @@
-package com.company;
+package com.company.model;
 
 import com.company.view.widget.EditText;
 
@@ -15,9 +15,5 @@ public class Usuario {
 
     }
 
-    void pedirDatos() {
-        nombre = new EditText("Nombre").pedir();
-        apellido = new EditText("Introduzca se apellido").pedir();
 
-    }
 }
