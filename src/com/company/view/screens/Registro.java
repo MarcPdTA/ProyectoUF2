@@ -7,7 +7,7 @@ public class Registro {
 
     String username;
 
-    void start() {
+    public static void start() {
 
         Usuario usuario = new Usuario();
 
