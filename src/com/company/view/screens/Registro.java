@@ -11,7 +11,7 @@ public class Registro {
 
         Usuario usuario = new Usuario();
 
-        usuario.nombre = new EditText("Nombre: ").pedir();
+        usuario.nombre = new EditText("Nombre: ").pedirString();
     }
 
     void pedirDatos() {
