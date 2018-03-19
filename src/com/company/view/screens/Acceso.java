@@ -1,23 +1,27 @@
 package com.company.view.screens;
 
-import java.util.Scanner;
+import com.company.view.widget.Menu;
 
 public class Acceso {
-    char opcion;
+    Menu menu = new Menu(2);
+    int opcion;
 
     public void start(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Que quieres hacer?");
-        System.out.println("a. Acceder.\nb. Registrarte.");
-        opcion = scanner.nextLine().charAt(1);
-        switch (opcion){
-            case 'a':
+    menu.show("Que quieres hacer?","Acceder","Registrarse");
+    opcion=menu.option();
 
+        switch (opcion){
+            case '1':
                 break;
-            case 'b':
+
+            case '2':
                 Registro.start();
                 break;
+
+            default:
+                break;
         }
+
 
     }
 }

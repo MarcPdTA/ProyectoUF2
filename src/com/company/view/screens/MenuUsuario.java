@@ -6,8 +6,8 @@ public class MenuUsuario {
 
     public void start() {
 
-        Menu menu = new Menu();
 
-        menu.show();
+
+
     }
 }
