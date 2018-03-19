@@ -41,4 +41,13 @@ public class EditText {
 
             return numero;
     }
+
+    public long pedirLong(){
+
+        long numero=0;
+
+        return numero;
+
+
+    }
 }

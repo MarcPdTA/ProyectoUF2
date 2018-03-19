@@ -9,14 +9,10 @@ public class Registro {
 
     public static void start() {
 
-        Usuario usuario = new Usuario();
+        String nombre = new EditText("Nombre: ").pedirString();
 
-        usuario.nombre = new EditText("Nombre: ").pedirString();
-    }
-
-    void pedirDatos() {
-//        nombre = new EditText("Nombre").pedir();
-//        apellido = new EditText("Introduzca se apellido").pedir();
 
     }
+
+
 }
