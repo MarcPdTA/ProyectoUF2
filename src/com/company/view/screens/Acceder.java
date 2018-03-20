@@ -8,9 +8,10 @@ public class Acceder {
 
         public void start(){
             boolean noValido;
+            ManagerUsuario managerUsuario = new ManagerUsuario();
+            MenuUsuario menuUsuario = new MenuUsuario();
             do {
 
-                ManagerUsuario managerUsuario = new ManagerUsuario();
                 String usuario = new EditText("Usuario: ").pedirString();
                 String contraseña = new EditText("Contraseña: ").pedirString();
 
@@ -18,7 +19,7 @@ public class Acceder {
                 if(noValido){
                     System.out.println("Usuario/Contraseña incorrectos.");
                 }
-            }while(noValido);
-
+            } while(noValido);
+            menuUsuario.start();
         }
 }
