@@ -53,7 +53,13 @@ public class ManagerUsuario {
 
     }
 
-    public void borrarUsuario(){
+    public void borrarUsuario(String username){
+
+        for (int i = 0; i <usuarios.length ; i++) {
+            if(usuarios[i]!=null && usuarios[i].usuario.equals(username)){
+                usuarios[i]=null;
+            }
+        }
 
     }
 
