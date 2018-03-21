@@ -1,6 +1,6 @@
 package com.company.view.screens;
 
-public class Sucribirse {
+public class Suscribirse {
     public void start() {
         System.out.println("Suscribirse");
     }

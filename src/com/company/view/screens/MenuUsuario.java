@@ -5,7 +5,7 @@ import com.company.view.widget.Menu;
 public class MenuUsuario {
     Menu menu = new Menu(4);
     Donar donar = new Donar();
-    Sucribirse suscribirse = new Sucribirse();
+    Suscribirse suscribirse = new Suscribirse();
     MisSuscripciones misSuscripciones = new MisSuscripciones();
     HistorialDonativos historialDonativos = new HistorialDonativos();
     int opcion;
@@ -15,19 +15,19 @@ public class MenuUsuario {
         opcion = menu.option();
 
         switch (opcion) {
-            case '1':
+            case 1:
                 donar.start();
                 break;
 
-            case '2':
+            case 2:
                 suscribirse.start();
                 break;
 
-            case '3':
+            case 3:
                 misSuscripciones.start();
                 break;
 
-            case '4':
+            case 4:
                 historialDonativos.start();
                 break;
 

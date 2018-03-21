@@ -18,6 +18,6 @@ public class Menu {
 
     public int option(){
 
-        return (new EditText("Opción: ").pedirInt(1,longitud))-1;
+        return (new EditText("Opción: ").pedirInt(1,longitud));
     }
 }

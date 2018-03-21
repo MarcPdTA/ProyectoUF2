@@ -9,7 +9,10 @@ import com.company.view.widget.Menu;
 public class Main {
 
     public static void main(String[] args) {
-        new Acceso().start();
+
+        ManagerUsuario managerUsuario = new ManagerUsuario();
+        new Acceso().start(managerUsuario);
+
     }
-    ManagerUsuario managerUsuario = new ManagerUsuario();
+
 }

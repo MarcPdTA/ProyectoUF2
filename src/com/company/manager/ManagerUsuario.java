@@ -34,7 +34,7 @@ public class ManagerUsuario {
     public boolean usuarioExiste(String nombre){
 
         for (int i = 0; i <usuarios.length ; i++) {
-            if(usuarios[i].nombre.equals(nombre)){return true;
+            if(usuarios[i]!=null && usuarios[i].nombre.equals(nombre)){return true;
             }
         }
 
