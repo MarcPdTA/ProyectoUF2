@@ -4,6 +4,8 @@ import com.company.view.widget.Menu;
 
 public class Acceso {
     Menu menu = new Menu(2);
+    Registro registro = new Registro();
+    Acceder acceder = new Acceder();
     int opcion;
 
     public void start(){
@@ -12,10 +14,11 @@ public class Acceso {
 
         switch (opcion){
             case '1':
+                acceder.start();
                 break;
 
             case '2':
-                Registro.start();
+                registro.start();
                 break;
 
             default:
