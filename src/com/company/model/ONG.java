@@ -1,5 +1,8 @@
 package com.company.model;
 
 public class ONG {
-    String nombre;
+    public String nombre;
+    public int id;
+    public String[] nombrePais;
+
 }
