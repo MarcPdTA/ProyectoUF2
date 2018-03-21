@@ -7,9 +7,9 @@ import com.company.view.widget.EditText;
 public class Acceder {
     String usuario;
     String contraseña;
-    public void start(){
+    public void start(ManagerUsuario managerUsuario){
         boolean noValido;
-        ManagerUsuario managerUsuario = new ManagerUsuario();
+
         MenuUsuario menuUsuario = new MenuUsuario();
         do {
 

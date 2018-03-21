@@ -1,5 +1,6 @@
 package com.company.view.screens;
 
+import com.company.manager.ManagerUsuario;
 import com.company.view.widget.Menu;
 
 public class Acceso {
@@ -8,20 +9,21 @@ public class Acceso {
     Acceder acceder = new Acceder();
     int opcion;
 
-    public void start(){
+    public void start(ManagerUsuario managerUsuario){
     menu.show("Que quieres hacer?","Acceder","Registrarse");
     opcion=menu.option();
 
         switch (opcion){
-            case '1':
-                acceder.start();
+            case 1:
+                acceder.start(managerUsuario);
                 break;
 
-            case '2':
-                registro.start();
+            case 2:
+                registro.start(managerUsuario);
                 break;
 
             default:
+
                 break;
         }
 
