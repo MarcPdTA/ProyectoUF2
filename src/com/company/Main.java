@@ -11,6 +11,8 @@ public class Main {
     public static void main(String[] args) {
 
         ManagerUsuario managerUsuario = new ManagerUsuario();
+        managerUsuario.crearUsuario("usuario","usuario", "usuario", "usuario",
+                "usuario", "usuario", "usuario", 123123);
         new Acceso().start(managerUsuario);
 
     }

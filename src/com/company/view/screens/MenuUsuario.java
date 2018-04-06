@@ -1,5 +1,6 @@
 package com.company.view.screens;
 
+import com.company.manager.ManagerUsuario;
 import com.company.view.widget.Menu;
 
 public class MenuUsuario {
@@ -10,8 +11,8 @@ public class MenuUsuario {
     HistorialDonativos historialDonativos = new HistorialDonativos();
     int opcion;
 
-    public void start() {
-        menu.show("Que quieres hacer?", "Realizar Donativo", "Suscribirme", "Mis Suscripciones", "Historial de Donativos");
+    public void start(ManagerUsuario managerUsuario) {
+        menu.show("Menu principal ::: " + managerUsuario.usuarioConectado.usuario, "Realizar Donativo", "Suscribirme", "Mis Suscripciones", "Historial de Donativos");
         opcion = menu.option();
 
         switch (opcion) {

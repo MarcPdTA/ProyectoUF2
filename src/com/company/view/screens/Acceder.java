@@ -21,6 +21,6 @@ public class Acceder {
                 System.out.println("Usuario/Contraseña incorrectos.");
             }
         } while(!managerUsuario.verificarUsuario(usuario,contraseña));
-        menuUsuario.start();
+        menuUsuario.start(managerUsuario);
     }
 }

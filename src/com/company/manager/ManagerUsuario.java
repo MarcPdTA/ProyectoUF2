@@ -5,6 +5,7 @@ import com.company.model.Usuario;
 public class ManagerUsuario {
 
     Usuario[] usuarios = new Usuario[100];
+    public Usuario usuarioConectado;
 
     public void crearUsuario(String nombre,String apellido,String username,String contraseña,String telefono,
                              String DNI, String correo, long cuenta){
@@ -45,6 +46,7 @@ public class ManagerUsuario {
 
         for (int i = 0; i <usuarios.length ; i++) {
             if(usuarios[i]!=null && usuarios[i].usuario.equals(username) && usuarios[i].contraseña.equals(contraseña)){
+                usuarioConectado=usuarios[i];
                 return true;
             }
         }
