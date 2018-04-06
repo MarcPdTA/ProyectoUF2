@@ -1,6 +1,7 @@
 package com.company.view.screens;
 
 import com.company.Main;
+import com.company.manager.ManagerONG;
 import com.company.manager.ManagerUsuario;
 import com.company.model.Usuario;
 import com.company.view.widget.EditText;
@@ -8,7 +9,7 @@ import com.company.view.widget.EditText;
 public class Registro {
 
 
-    public static void start(ManagerUsuario managerUsuario) {
+    public static void start(ManagerUsuario managerUsuario, ManagerONG managerONG) {
 
 
         String nombre = new EditText("Nombre: ").pedirString();
@@ -22,7 +23,7 @@ public class Registro {
 
         managerUsuario.crearUsuario(nombre,apellido,usuario,contraseña,telefono,DNI,correo,cuenta);
 
-        new Acceso().start(managerUsuario);
+        new Acceso().start(managerUsuario, managerONG);
 
     }
 
