@@ -67,15 +67,17 @@ public class ManagerUsuario {
 
     }
 
-    public boolean hacerDonacion(Usuario usuario, int dinero, ONG ong) {
-        if(usuario.dinero>= dinero){
-            for (int i = 0; i <usuario.donaciones.length ; i++) {
-                if(usuario.donaciones[i] == null) {
-                    usuario.donaciones[i] = "ID# " + (ong.id+1) + " Nombre: " + ong.nombre +" Cantidad: " + dinero;
+    public boolean hacerDonacion(ManagerUsuario managerUsuario, int dinero, ONG ong) {
+        if(managerUsuario.usuarioConectado.dinero>= dinero){
+
+            for (int i = 0; i <managerUsuario.usuarioConectado.donaciones.length ; i++) {
+                if(managerUsuario.usuarioConectado.donaciones[i] == null) {
+                    managerUsuario.usuarioConectado.donaciones[i] = "ID# " + (ong.id+1) + " Nombre: " + ong.nombre +" Cantidad: " + dinero;
                     break;
                 }
             }
-            usuario.dinero-=dinero;
+
+            managerUsuario.usuarioConectado.dinero-=dinero;
             return true;
         }
 

@@ -3,6 +3,7 @@ package com.company.view.widget;
 import java.util.Scanner;
 
 public class EditText {
+
     Scanner scanner = new Scanner(System.in);
     String text;
 
