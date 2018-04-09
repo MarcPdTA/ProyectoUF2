@@ -50,4 +50,9 @@ public class EditText {
 
 
     }
+
+    public void esperar(){
+        System.out.println(text);
+        scanner.nextLine();
+    }
 }

@@ -11,6 +11,8 @@ public class Usuario {
     public String telefono;
     public String DNI;
     public String correo;
+    public int dinero;
+    public String[] donaciones = new String[10];
     public long cuenta;
 
 

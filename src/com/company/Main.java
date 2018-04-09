@@ -14,8 +14,8 @@ public class Main {
         ManagerUsuario managerUsuario = new ManagerUsuario();
         ManagerONG managerONG = new ManagerONG();
 
-        managerUsuario.crearUsuario("usuario","usuario", "usuario", "usuario",
-                "usuario", "usuario", "usuario", 123123);
+        managerUsuario.crearUsuario("usuario","usuario", "u", "u",
+                "usuario", "usuario", "usuario",100, 123123);
 
         managerONG.crearONG("STC" ,"España","Francia");
         managerONG.crearONG("HQT" ,"Italia","Francia");

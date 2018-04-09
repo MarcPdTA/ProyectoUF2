@@ -1,5 +1,6 @@
 package com.company.manager;
 
+import com.company.model.ONG;
 import com.company.model.Usuario;
 
 public class ManagerUsuario {
@@ -8,7 +9,7 @@ public class ManagerUsuario {
     public Usuario usuarioConectado;
 
     public void crearUsuario(String nombre,String apellido,String username,String contraseña,String telefono,
-                             String DNI, String correo, long cuenta){
+                             String DNI, String correo,int dinero, long cuenta){
         if(!usuarioExiste(nombre)) {
             Usuario usuario = new Usuario();
 
@@ -20,6 +21,7 @@ public class ManagerUsuario {
             usuario.DNI = DNI;
             usuario.correo = correo;
             usuario.cuenta = cuenta;
+            usuario.dinero = dinero;
 
             for (int i = 0; i < usuarios.length; i++) {
                 if (usuarios[i] == null) {
@@ -63,6 +65,21 @@ public class ManagerUsuario {
             }
         }
 
+    }
+
+    public boolean hacerDonacion(Usuario usuario, int dinero, ONG ong) {
+        if(usuario.dinero>= dinero){
+            for (int i = 0; i <usuario.donaciones.length ; i++) {
+                if(usuario.donaciones[i] == null) {
+                    usuario.donaciones[i] = "ID# " + (ong.id+1) + " Nombre: " + ong.nombre +" Cantidad: " + dinero;
+                    break;
+                }
+            }
+            usuario.dinero-=dinero;
+            return true;
+        }
+
+        return false;
     }
 
 }

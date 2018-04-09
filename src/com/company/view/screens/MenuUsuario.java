@@ -13,7 +13,7 @@ public class MenuUsuario {
     int opcion;
 
     public void start(ManagerUsuario managerUsuario, ManagerONG managerONG) {
-        menu.show("Menu principal ::: " + managerUsuario.usuarioConectado.usuario, "Realizar Donativo", "Suscribirme", "Mis Suscripciones", "Historial de Donativos");
+        menu.showMenuUsuario("Menu principal" ,managerUsuario ,managerONG ,"Realizar Donativo", "Suscribirme", "Mis Suscripciones", "Historial de Donativos");
         opcion = menu.option();
 
         switch (opcion) {
@@ -30,7 +30,7 @@ public class MenuUsuario {
                 break;
 
             case 4:
-                historialDonativos.start();
+                historialDonativos.start(managerUsuario, managerONG);
                 break;
 
             default:
