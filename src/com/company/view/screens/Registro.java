@@ -1,22 +1,32 @@
 package com.company.view.screens;
 
+import com.company.Main;
+import com.company.manager.ManagerONG;
+import com.company.manager.ManagerUsuario;
 import com.company.model.Usuario;
 import com.company.view.widget.EditText;
 
 public class Registro {
 
-    String username;
 
-    void start() {
+    public static void start(ManagerUsuario managerUsuario, ManagerONG managerONG) {
 
-        Usuario usuario = new Usuario();
 
-        usuario.nombre = new EditText("Nombre: ").pedir();
+        String nombre = new EditText("Nombre: ").pedirString();
+        String apellido = new EditText("Apellidos: ").pedirString();
+        String contraseña = new EditText("Contraseña: ").pedirString();
+        String usuario = new EditText("Nombre de usuario: ").pedirString();
+        String telefono = new EditText("Telefono: ").pedirString();
+        String DNI = new EditText("DNI: ").pedirString();
+        String correo = new EditText("Correo electronico: ").pedirString();
+        int dinero = new EditText("Ingreso inicial").pedirInt(0, 1000000000);
+        long cuenta = new EditText("Cuenta bancaria: ").pedirLong();
+
+        managerUsuario.crearUsuario(nombre,apellido,usuario,contraseña,telefono,DNI,correo,dinero,cuenta);
+
+        new Acceso().start(managerUsuario, managerONG);
+
     }
 
-    void pedirDatos() {
-//        nombre = new EditText("Nombre").pedir();
-//        apellido = new EditText("Introduzca se apellido").pedir();
 
-    }
 }

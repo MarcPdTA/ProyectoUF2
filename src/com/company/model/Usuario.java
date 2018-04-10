@@ -3,17 +3,17 @@ package com.company.model;
 import com.company.view.widget.EditText;
 
 public class Usuario {
-
-    int id;
-    public String nombre, apellido;
-
-    public Usuario(){
-
-    }
-
-    public Usuario(String nombre, String apellido) {
-
-    }
+    public int id;
+    public String nombre;
+    public String apellido;
+    public String usuario;
+    public String contraseña;
+    public String telefono;
+    public String DNI;
+    public String correo;
+    public int dinero;
+    public String[] donaciones = new String[10];
+    public long cuenta;
 
 
 }
