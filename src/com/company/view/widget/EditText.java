@@ -66,7 +66,7 @@ public class EditText {
         String email = scanner.nextLine();
 
 
-
+//
     for (int i = 0; i < email.length(); i++) {
         if (email.charAt(i) == '@' && email.charAt(0) != '@') {
             for (int j = i; j < email.length(); j++) {
