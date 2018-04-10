@@ -3,6 +3,7 @@ package com.company.view.widget;
 import java.util.Scanner;
 
 public class EditText {
+
     Scanner scanner = new Scanner(System.in);
     String text;
 
@@ -49,5 +50,10 @@ public class EditText {
         return numero;
 
 
+    }
+
+    public void esperar(){
+        System.out.println(text);
+        scanner.nextLine();
     }
 }

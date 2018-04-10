@@ -1,13 +1,15 @@
 package com.company.manager;
 
+import com.company.model.ONG;
 import com.company.model.Usuario;
 
 public class ManagerUsuario {
 
     Usuario[] usuarios = new Usuario[100];
+    public Usuario usuarioConectado;
 
     public void crearUsuario(String nombre,String apellido,String username,String contraseña,String telefono,
-                             String DNI, String correo, long cuenta){
+                             String DNI, String correo,int dinero, long cuenta){
         if(!usuarioExiste(nombre)) {
             Usuario usuario = new Usuario();
 
@@ -19,6 +21,7 @@ public class ManagerUsuario {
             usuario.DNI = DNI;
             usuario.correo = correo;
             usuario.cuenta = cuenta;
+            usuario.dinero = dinero;
 
             for (int i = 0; i < usuarios.length; i++) {
                 if (usuarios[i] == null) {
@@ -45,6 +48,7 @@ public class ManagerUsuario {
 
         for (int i = 0; i <usuarios.length ; i++) {
             if(usuarios[i]!=null && usuarios[i].usuario.equals(username) && usuarios[i].contraseña.equals(contraseña)){
+                usuarioConectado=usuarios[i];
                 return true;
             }
         }
@@ -61,6 +65,23 @@ public class ManagerUsuario {
             }
         }
 
+    }
+
+    public boolean hacerDonacion(ManagerUsuario managerUsuario, int dinero, ONG ong) {
+        if(managerUsuario.usuarioConectado.dinero>= dinero){
+
+            for (int i = 0; i <managerUsuario.usuarioConectado.donaciones.length ; i++) {
+                if(managerUsuario.usuarioConectado.donaciones[i] == null) {
+                    managerUsuario.usuarioConectado.donaciones[i] = "ID# " + (ong.id+1) + " Nombre: " + ong.nombre +" Cantidad: " + dinero;
+                    break;
+                }
+            }
+
+            managerUsuario.usuarioConectado.dinero-=dinero;
+            return true;
+        }
+
+        return false;
     }
 
 }
