@@ -1,5 +1,7 @@
 package com.company.view.widget;
 
+import com.company.manager.ManagerUsuario;
+
 import java.util.Scanner;
 
 public class EditText {
@@ -56,4 +58,30 @@ public class EditText {
         System.out.println(text);
         scanner.nextLine();
     }
+
+
+    public String checkEmail(){
+        do {
+            System.out.println(text);
+        String email = scanner.nextLine();
+
+
+
+    for (int i = 0; i < email.length(); i++) {
+        if (email.charAt(i) == '@' && email.charAt(0) != '@') {
+            for (int j = i; j < email.length(); j++) {
+                if (email.charAt(i) == '.') {
+                    if (email.charAt(i + 1) == 'c' && email.charAt(i + 2) == 'o' && email.charAt(i + 3) == 'm' || email.charAt(i + 1) == 'n' && email.charAt(i + 2) == 'e' && email.charAt(i + 3) == 't') {
+                        return email;
+                    }
+                }
+            }
+        }
+
+    }
+            System.out.println("ERROR!");
+
+}while (true);
+    }
+
 }
