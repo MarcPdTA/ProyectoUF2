@@ -22,11 +22,11 @@ public class MenuUsuario {
                 break;
 
             case 2:
-                suscribirse.start();
+                suscribirse.start(managerUsuario, managerONG);
                 break;
 
             case 3:
-                misSuscripciones.start();
+                misSuscripciones.start(managerUsuario, managerONG);
                 break;
 
             case 4:
