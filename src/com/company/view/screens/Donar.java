@@ -2,7 +2,6 @@ package com.company.view.screens;
 
 import com.company.manager.ManagerONG;
 import com.company.manager.ManagerUsuario;
-import com.company.model.ONG;
 import com.company.view.widget.EditText;
 import com.company.view.widget.Menu;
 
@@ -16,7 +15,7 @@ public class Donar {
 
         int cantidadDinero = new EditText("Que cantidad quiere donar a " + managerONG.ONGs[idONG].nombre + "?  Dinero actual: "+managerUsuario.usuarioConectado.dinero+"€").pedirInt(1,1000000000);
 
-        if(managerUsuario.hacerDonacion(managerUsuario.usuarioConectado,cantidadDinero,managerONG.ONGs[idONG])){
+        if(managerUsuario.hacerDonacion(managerUsuario,cantidadDinero,managerONG.ONGs[idONG])){
             System.out.println("\n¡Donación realizada!\n");
             new HistorialDonativos().start(managerUsuario, managerONG);
         }else{
@@ -24,12 +23,6 @@ public class Donar {
         }
 
         new EditText("Pulse INTRO para continuar").esperar();
-
-        //for (int i = 0; i <managerUsuario.usuarioConectado.donaciones.length ; i++) {
-            //if (managerUsuario.usuarioConectado.donaciones[i] != null) {
-                //System.out.println(managerUsuario.usuarioConectado.donaciones[i]+"\n");
-            //}
-        //}
 
         new MenuUsuario().start(managerUsuario, managerONG);
     }
