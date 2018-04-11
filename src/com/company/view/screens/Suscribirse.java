@@ -13,9 +13,9 @@ public class Suscribirse {
 
         int cantidadDinero = new EditText("Que cantidad quiere donar mensualmente a " + managerONG.ONGs[idONG].nombre + "?  Dinero actual: "+managerUsuario.usuarioConectado.dinero+"€").pedirInt(1,1000000000);
 
-        if(managerUsuario.hacerDonacion(managerUsuario,cantidadDinero,managerONG.ONGs[idONG])){
-            System.out.println("\n¡Donación realizada!\n");
-            new HistorialDonativos().start(managerUsuario, managerONG);
+        if(managerUsuario.suscribirse(managerUsuario,cantidadDinero,managerONG.ONGs[idONG])){
+            System.out.println("\n¡Se ha suscrito a " + managerONG.ONGs[idONG].nombre + "!\n");
+            new MisSuscripciones().start(managerUsuario, managerONG);
         }else{
             System.out.println("\nNo tienes suficiente dinero.\n");
         }
