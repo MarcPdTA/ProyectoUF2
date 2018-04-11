@@ -37,7 +37,7 @@ public class EditText {
                     System.out.println("Número inválido"+"\n");
                 }
             }catch (Exception exception){
-                System.out.println("Número inválido"+"\n");
+                New TextoColor().colorError("Número inválido"+"\n");
             }
 
         }while (!isNum);
