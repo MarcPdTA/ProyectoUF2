@@ -11,7 +11,7 @@ public class Acceso {
     int opcion;
 
     public void start(ManagerUsuario managerUsuario, ManagerONG managerONG){
-    menu.show("Que quieres hacer?","Acceder","Registrarse");
+    menu.show(1,"Que quieres hacer?","Acceder","Registrarse");
     opcion=menu.option();
 
         switch (opcion){

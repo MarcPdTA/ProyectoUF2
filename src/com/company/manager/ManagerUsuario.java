@@ -103,4 +103,17 @@ public class ManagerUsuario {
 
     }
 
+    public Usuario encontrarUsuario(String username){
+
+        for (int i = 0; i <usuarios.length ; i++) {
+            if (usuarios[i]!=null && usuarios[i].usuario.equals(username)){
+                return usuarios[i];
+            }
+        }
+        return null;
+    }
+
+    public void concederPermisoAdministrador(Usuario usuario){
+        usuario.admin=true;
+    }
 }

@@ -9,7 +9,7 @@ import com.company.view.widget.EditText;
 public class Registro {
 
 
-    public static void start(ManagerUsuario managerUsuario, ManagerONG managerONG) {
+    public void start(ManagerUsuario managerUsuario, ManagerONG managerONG) {
 
 
         String nombre = new EditText("Nombre: ").pedirString();

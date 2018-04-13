@@ -8,7 +8,7 @@ import com.company.view.widget.Menu;
 public class Suscribirse {
     public void start(ManagerUsuario managerUsuario, ManagerONG managerONG) {
         Menu menu = new Menu(managerONG.cantidadONG());
-        menu.showMenuUsuario("Suscribirse",managerUsuario,managerONG,managerONG.ONGNombres());
+        menu.showMenuUsuario(1,"Suscribirse",managerUsuario,managerONG,managerONG.ONGNombres());
         int idONG = new EditText("Elija una ONG (número)").pedirInt(1,managerONG.cantidadONG())-1;
 
         int cantidadDinero = new EditText("Que cantidad quiere donar mensualmente a " + managerONG.ONGs[idONG].nombre + "?  Dinero actual: "+managerUsuario.usuarioConectado.dinero+"€").pedirInt(1,1000000000);
