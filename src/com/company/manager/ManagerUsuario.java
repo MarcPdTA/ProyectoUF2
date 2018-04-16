@@ -103,4 +103,33 @@ public class ManagerUsuario {
 
     }
 
+    public Usuario encontrarUsuario(String username){
+
+        for (int i = 0; i <usuarios.length ; i++) {
+            if (usuarios[i]!=null && usuarios[i].usuario.equals(username)){
+                return usuarios[i];
+            }
+        }
+        return null;
+    }
+
+    public void concederPermisoAdministrador(Usuario usuario){
+        usuario.admin=true;
+    }
+
+    public void cambiarNombre(Usuario usuario,String nuevoNombre){
+        usuario.nombre=nuevoNombre;
+    }
+
+    public void cambiarApellido(Usuario usuario,String nuevoApellido){
+        usuario.apellido=nuevoApellido;
+    }
+
+    public void cambiarNombreUsuario(Usuario usuario,String nuevoNombreUsuario){
+        usuario.usuario=nuevoNombreUsuario;
+    }
+
+    public void cambiarContraseña(Usuario usuario,String nuevaContraseña){
+        usuario.contraseña=nuevaContraseña;
+    }
 }
