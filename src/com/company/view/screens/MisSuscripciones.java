@@ -8,7 +8,7 @@ import com.company.view.widget.Menu;
 public class MisSuscripciones {
     public void start(ManagerUsuario managerUsuario, ManagerONG managerONG) {
         if(managerUsuario.usuarioConectado.suscripciones[0]!=null) {
-            new Menu(managerUsuario.usuarioConectado.suscripciones.length).show(1,"\nMis suscripciones", managerUsuario.usuarioConectado.suscripciones);
+            new Menu(managerUsuario.usuarioConectado.suscripciones.length,1).show("\nMis suscripciones", managerUsuario.usuarioConectado.suscripciones);
             new EditText("Pulse INTRO para continuar").esperar();
         }
         else {

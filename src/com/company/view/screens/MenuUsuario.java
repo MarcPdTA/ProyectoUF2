@@ -5,19 +5,20 @@ import com.company.manager.ManagerUsuario;
 import com.company.view.widget.Menu;
 
 public class MenuUsuario {
-    Menu menu = new Menu(5);
-    Menu menuA = new Menu(5);
+    Menu menu = new Menu(5,1);
+    Menu menuA = new Menu(5,6);
     Donar donar = new Donar();
     Suscribirse suscribirse = new Suscribirse();
     MisSuscripciones misSuscripciones = new MisSuscripciones();
     HistorialDonativos historialDonativos = new HistorialDonativos();
     Ingresar ingresar = new Ingresar();
+    GestionarUsuarios gestionarUsuarios = new GestionarUsuarios();
     int opcion;
 
     public void startMenuUsuario(ManagerUsuario managerUsuario, ManagerONG managerONG) {
 
         if (!managerUsuario.usuarioConectado.admin) {
-            menu.showMenuUsuario(1,"Menu principal", managerUsuario, managerONG, "Realizar Donativo", "Suscribirme", "Mis Suscripciones", "Historial de Donativos", "Ingresar dinero");
+            menu.showMenuUsuario("Menu principal", managerUsuario, managerONG, "Realizar Donativo", "Suscribirme", "Mis Suscripciones", "Historial de Donativos", "Ingresar dinero");
             opcion = menu.option();
             switch (opcion) {
                 case 1:
@@ -46,8 +47,8 @@ public class MenuUsuario {
         }
 
         else {
-            menuA.showMenuUsuario(1,"Menu principal", managerUsuario, managerONG, "Realizar Donativo", "Suscribirme", "Mis Suscripciones", "Historial de Donativos", "Ingresar dinero");
-            menuA.show(6,"Panel de administración",  "Gestionar Usuarios", "Gestionar ONGs");
+            menuA.showMenuUsuario("Menu principal", managerUsuario, managerONG, "Realizar Donativo", "Suscribirme", "Mis Suscripciones", "Historial de Donativos", "Ingresar dinero");
+            menuA.show("Panel de administración",  "Gestionar Usuarios", "Gestionar ONGs");
 
             opcion = menuA.option();
 
@@ -71,6 +72,9 @@ public class MenuUsuario {
                 case 5:
                     ingresar.start(managerUsuario, managerONG);
                     break;
+
+                case 6:
+                    gestionarUsuarios.start(managerUsuario,managerONG);
 
                 default:
                     break;

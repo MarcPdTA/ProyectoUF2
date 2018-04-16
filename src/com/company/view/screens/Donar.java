@@ -9,8 +9,8 @@ public class Donar {
 
 
     public void start(ManagerUsuario managerUsuario, ManagerONG managerONG) {
-        Menu menu = new Menu(managerONG.cantidadONG());
-        menu.showMenuUsuario(1,"Donar",managerUsuario,managerONG,managerONG.ONGNombres());
+        Menu menu = new Menu(1,managerONG.cantidadONG());
+        menu.showMenuUsuario("Donar",managerUsuario,managerONG,managerONG.ONGNombres());
         int idONG = new EditText("Elija una ONG (número)").pedirInt(1,managerONG.cantidadONG())-1;
 
         int cantidadDinero = new EditText("Que cantidad quiere donar a " + managerONG.ONGs[idONG].nombre + "?  Dinero actual: "+managerUsuario.usuarioConectado.dinero+"€").pedirInt(1,1000000000);

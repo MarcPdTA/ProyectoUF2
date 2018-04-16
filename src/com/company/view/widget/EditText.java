@@ -17,7 +17,7 @@ public class EditText {
             System.out.println(text);
             mensaje=scanner.nextLine();
             if(mensaje.equals("")){
-                System.out.println("No ha introducido texto"+"\n");
+                new TextoColor().colorError("No ha introducido texto");
             }
         }while (mensaje.equals(""));
         return mensaje;
@@ -34,10 +34,10 @@ public class EditText {
                 if(numero>=min && numero<=max){
                 isNum=true;}
                 else {
-                    System.out.println("Número inválido"+"\n");
+                    new TextoColor().colorError("Número inválido");
                 }
             }catch (Exception exception){
-                new TextoColor().colorError("Número inválido"+"\n");
+                new TextoColor().colorError("Número inválido");
             }
 
         }while (!isNum);
