@@ -13,7 +13,9 @@ public class Usuario {
     public String correo;
     public int dinero;
     public String[] donaciones = new String[10];
+    public String[] suscripciones = new String[10];
     public long cuenta;
+    public boolean admin = false;
 
 
 }
