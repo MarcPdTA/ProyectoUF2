@@ -16,7 +16,7 @@ public class ManagerUsuario {
             usuario.nombre = nombre;
             usuario.apellido = apellido;
             usuario.usuario = username;
-            usuario.contraseña=contraseña;
+            usuario.contraseña = contraseña;
             usuario.telefono = telefono;
             usuario.DNI = DNI;
             usuario.correo = correo;
@@ -57,10 +57,10 @@ public class ManagerUsuario {
 
     }
 
-    public void borrarUsuario(String username){
+    public void borrarUsuario(Usuario usuario){
 
         for (int i = 0; i <usuarios.length ; i++) {
-            if(usuarios[i]!=null && usuarios[i].usuario.equals(username)){
+            if(usuarios[i]!=null && usuarios[i].usuario.equals(usuario.usuario)){
                 usuarios[i]=null;
             }
         }
@@ -132,4 +132,12 @@ public class ManagerUsuario {
     public void cambiarContraseña(Usuario usuario,String nuevaContraseña){
         usuario.contraseña=nuevaContraseña;
     }
+
+    public void cambiarDNI(Usuario usuario, String nuevoDNI) { usuario.DNI = nuevoDNI; }
+
+    public void cambiarCorreo(Usuario usuario, String nuevoCorreo) { usuario.correo = nuevoCorreo; }
+
+    public void cambiarTelefono(Usuario usuario, String nuevoTelefono) { usuario.telefono = nuevoTelefono; }
+
+
 }
