@@ -9,7 +9,7 @@ import com.company.view.widget.EditText;
 public class Registro {
 
 
-    public static void start(ManagerUsuario managerUsuario, ManagerONG managerONG) {
+    public void start(ManagerUsuario managerUsuario, ManagerONG managerONG) {
 
 
         String nombre = new EditText("Nombre: ").pedirString();
@@ -18,8 +18,8 @@ public class Registro {
         String usuario = new EditText("Nombre de usuario: ").pedirString();
         String telefono = new EditText("Telefono: ").pedirString();
         String DNI = new EditText("DNI: ").pedirString();
-        String correo = new EditText("Correo electronico: ").pedirString();
-        int dinero = new EditText("Ingreso inicial").pedirInt(0, 1000000000);
+        String correo = new EditText("Correo electronico: ").checkEmail();
+        int dinero = new EditText("Ingreso inicial: ").pedirInt(0, 1000000000);
         long cuenta = new EditText("Cuenta bancaria: ").pedirLong();
 
         managerUsuario.crearUsuario(nombre,apellido,usuario,contraseña,telefono,DNI,correo,dinero,cuenta);
