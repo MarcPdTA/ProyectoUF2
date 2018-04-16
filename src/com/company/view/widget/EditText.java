@@ -65,8 +65,6 @@ public class EditText {
             System.out.println(text);
         String email = scanner.nextLine();
 
-
-//
     for (int i = 0; i < email.length(); i++) {
         if (email.charAt(i) == '@' && email.charAt(0) != '@') {
             for (int j = i+1; j < email.length(); j++) {
@@ -81,7 +79,7 @@ public class EditText {
         }
 
     }
-            System.out.println("ERROR!");
+            new TextoColor().colorError("ERROR!");
 
 }while (true);
     }

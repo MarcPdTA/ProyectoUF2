@@ -4,6 +4,7 @@ import com.company.manager.ManagerONG;
 import com.company.manager.ManagerUsuario;
 import com.company.view.widget.EditText;
 import com.company.view.widget.Menu;
+import com.company.view.widget.TextoColor;
 
 public class Suscribirse {
     public void start(ManagerUsuario managerUsuario, ManagerONG managerONG) {
@@ -14,10 +15,10 @@ public class Suscribirse {
         int cantidadDinero = new EditText("Que cantidad quiere donar mensualmente a " + managerONG.ONGs[idONG].nombre + "?  Dinero actual: "+managerUsuario.usuarioConectado.dinero+"€").pedirInt(1,1000000000);
 
         if(managerUsuario.suscribirse(managerUsuario,cantidadDinero,managerONG.ONGs[idONG])){
-            System.out.println("\n¡Se ha suscrito a " + managerONG.ONGs[idONG].nombre + "!\n");
+            new TextoColor().colorCheck("¡Se ha suscrito a " + managerONG.ONGs[idONG].nombre + "!");
             new MisSuscripciones().start(managerUsuario, managerONG);
         }else{
-            System.out.println("\nNo tienes suficiente dinero.\n");
+            new TextoColor().colorError("No tienes suficiente dinero.");
         }
 
     }

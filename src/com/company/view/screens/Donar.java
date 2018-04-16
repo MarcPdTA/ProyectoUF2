@@ -4,6 +4,7 @@ import com.company.manager.ManagerONG;
 import com.company.manager.ManagerUsuario;
 import com.company.view.widget.EditText;
 import com.company.view.widget.Menu;
+import com.company.view.widget.TextoColor;
 
 public class Donar {
 
@@ -16,12 +17,12 @@ public class Donar {
         int cantidadDinero = new EditText("Que cantidad quiere donar a " + managerONG.ONGs[idONG].nombre + "?  Dinero actual: "+managerUsuario.usuarioConectado.dinero+"€").pedirInt(1,1000000000);
 
         if(managerUsuario.hacerDonacion(managerUsuario,cantidadDinero,managerONG.ONGs[idONG])){
-            System.out.println("\n¡Donación realizada!\n");
+            new TextoColor().colorCheck("¡Donación realizada!");
             new HistorialDonativos().start(managerUsuario, managerONG);
         }else{
-            System.out.println("\nNo tienes suficiente dinero.\n");
+            new TextoColor().colorError("No tienes suficiente dinero.");
         }
-
+        System.out.println(" ");
         new EditText("Pulse INTRO para continuar").esperar();
 
         new MenuUsuario().startMenuUsuario(managerUsuario, managerONG);

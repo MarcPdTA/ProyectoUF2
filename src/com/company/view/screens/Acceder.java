@@ -4,6 +4,7 @@ import com.company.manager.ManagerONG;
 import com.company.manager.ManagerUsuario;
 import com.company.model.Usuario;
 import com.company.view.widget.EditText;
+import com.company.view.widget.TextoColor;
 
 public class Acceder {
     String usuario;
@@ -19,7 +20,7 @@ public class Acceder {
 
 
             if(!managerUsuario.verificarUsuario(usuario,contraseña)){
-                System.out.println("Usuario/Contraseña incorrectos.");
+                new TextoColor().colorError("Usuario/Contraseña incorrectos.");
             }
         } while(!managerUsuario.verificarUsuario(usuario,contraseña));
 
