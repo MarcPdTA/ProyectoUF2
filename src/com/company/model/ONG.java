@@ -5,4 +5,5 @@ public class ONG {
     public int id;
     public String[] nombresPais;
 
+
 }
