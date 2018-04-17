@@ -16,6 +16,6 @@ public class Usuario {
     public String[] suscripciones = new String[10];
     public long cuenta;
     public boolean admin = false;
-
+    ///CREAR LA CLASE SUSCRIPCIONES Y HACER UNA TABLA CON LOS DATOS AL MOSTRAR "MisSuscripciones"
 
 }
