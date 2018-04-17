@@ -13,6 +13,7 @@ public class MenuUsuario {
     HistorialDonativos historialDonativos = new HistorialDonativos();
     Ingresar ingresar = new Ingresar();
     GestionarUsuarios gestionarUsuarios = new GestionarUsuarios();
+    GestionarONGs gestionarOng = new GestionarONGs();
     int opcion;
 
     public void startMenuUsuario(ManagerUsuario managerUsuario, ManagerONG managerONG) {
@@ -75,7 +76,11 @@ public class MenuUsuario {
 
                 case 6:
                     gestionarUsuarios.start(managerUsuario,managerONG);
+                    break;
 
+                case 7:
+                    gestionarOng.start(managerUsuario, managerONG);
+                    break;
                 default:
                     break;
             }
