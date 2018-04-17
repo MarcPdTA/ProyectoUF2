@@ -2,6 +2,7 @@ package com.company.manager;
 
 import com.company.model.ONG;
 import com.company.model.Usuario;
+import com.company.view.widget.EditText;
 
 public class ManagerUsuario {
 
@@ -16,7 +17,7 @@ public class ManagerUsuario {
             usuario.nombre = nombre;
             usuario.apellido = apellido;
             usuario.usuario = username;
-            usuario.contraseña=contraseña;
+            usuario.contraseña = contraseña;
             usuario.telefono = telefono;
             usuario.DNI = DNI;
             usuario.correo = correo;
@@ -57,10 +58,10 @@ public class ManagerUsuario {
 
     }
 
-    public void borrarUsuario(String username){
+    public void borrarUsuario(Usuario usuario){
 
         for (int i = 0; i <usuarios.length ; i++) {
-            if(usuarios[i]!=null && usuarios[i].usuario.equals(username)){
+            if(usuarios[i]!=null && usuarios[i].usuario.equals(usuario.usuario)){
                 usuarios[i]=null;
             }
         }
@@ -101,6 +102,56 @@ public class ManagerUsuario {
     public void ingresar(Usuario usuario, int dinero){
         usuario.dinero += dinero;
 
+    }
+
+    public Usuario encontrarUsuario(String username){
+
+        for (int i = 0; i <usuarios.length ; i++) {
+            if (usuarios[i]!=null && usuarios[i].usuario.equals(username)){
+                return usuarios[i];
+            }
+        }
+        return null;
+    }
+
+    public void concederPermisoAdministrador(Usuario usuario){
+        usuario.admin=true;
+    }
+
+    public void cambiarNombre(Usuario usuario,String nuevoNombre){
+        usuario.nombre=nuevoNombre;
+    }
+
+    public void cambiarApellido(Usuario usuario,String nuevoApellido){
+        usuario.apellido=nuevoApellido;
+    }
+
+    public void cambiarNombreUsuario(Usuario usuario,String nuevoNombreUsuario){
+        usuario.usuario=nuevoNombreUsuario;
+    }
+
+    public void cambiarContraseña(Usuario usuario,String nuevaContraseña){
+        usuario.contraseña=nuevaContraseña;
+    }
+
+    public void cambiarDNI(Usuario usuario, String nuevoDNI) { usuario.DNI = nuevoDNI; }
+
+    public void cambiarCorreo(Usuario usuario, String nuevoCorreo) { usuario.correo = nuevoCorreo; }
+
+    public void cambiarTelefono(Usuario usuario, String nuevoTelefono) { usuario.telefono = nuevoTelefono; }
+
+    public void crearUsuarioAdmin(){
+        String nombre = new EditText("Nombre: ").pedirString();
+        String apellido = new EditText("Apellidos: ").pedirString();
+        String contraseña = new EditText("Contraseña: ").pedirString();
+        String usuario = new EditText("Nombre de usuario: ").pedirString();
+        String telefono = new EditText("Telefono: ").pedirString();
+        String DNI = new EditText("DNI: ").pedirString();
+        String correo = new EditText("Correo electronico: ").checkEmail();
+        int dinero = new EditText("Ingreso inicial: ").pedirInt(0, 1000000000);
+        long cuenta = new EditText("Cuenta bancaria: ").pedirLong();
+
+        crearUsuario(nombre,apellido,usuario,contraseña,telefono,DNI,correo,dinero,cuenta);
     }
 
 }

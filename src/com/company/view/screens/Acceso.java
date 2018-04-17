@@ -5,7 +5,7 @@ import com.company.manager.ManagerUsuario;
 import com.company.view.widget.Menu;
 
 public class Acceso {
-    Menu menu = new Menu(2);
+    Menu menu = new Menu(2,1);
     Registro registro = new Registro();
     Acceder acceder = new Acceder();
     int opcion;
