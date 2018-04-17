@@ -72,6 +72,14 @@ public class ManagerONG {
         ong.nombre=nuevoNombrePaisONG;
     }
 
+    public void borrarONG(ONG ong){
 
+        for (int i = 0; i <ONGs.length ; i++) {
+            if(ONGs[i]!=null && ONGs[i].nombre.equals(ong.nombre)){
+                ONGs[i]=null;
+            }
+        }
+
+    }
 
 }
