@@ -78,7 +78,7 @@ public class EditText {
     for (int i = 0; i < email.length(); i++) {
         if (email.charAt(i) == '@' && email.charAt(0) != '@') {
             for (int j = i+1; j < email.length(); j++) {
-                //falta comprovar gmail o hotmail
+                //falta comprobar gmail o hotmail
                 if (email.charAt(j) == '.') {
                     if (email.charAt(j + 1) == 'c' && email.charAt(j + 2) == 'o' && email.charAt(j + 3) == 'm'
                             || email.charAt(j + 1) == 'n' && email.charAt(j + 2) == 'e' && email.charAt(j + 3) == 't') {
