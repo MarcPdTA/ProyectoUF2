@@ -8,44 +8,56 @@ import com.company.view.widget.TextoColor;
 
 public class GestionarONGs {
 
-    Menu menu = new Menu(3,1);
+    public void start(ManagerUsuario managerUsuario, ManagerONG managerONG) {
+
+        Menu menu = new Menu(11, 1);
 
 
-    public void start(ManagerUsuario managerUsuario,ManagerONG managerONG){
-
-        menu.showMenuUsuario("Panel de control de ONGs",managerUsuario,managerONG,"Cambiar nombre", "Cambiar Pais","Volver al menú");
-
+        menu.showMenuUsuario("Panel de control de ONGs", managerUsuario, managerONG, "Cambiar nombre", "Crear nueva ONG", "Eliminar ONG","Listar ONGs", "Volver al menú");
         switch (menu.option()) {
             case 1:
                 try {
-                    managerONG.cambiarNombreONG(managerONG.encontrarONG(new EditText("Indique el nombre de la ONG").pedirString()),new EditText("Indique el nuevo nombre").pedirString());
-                    new TextoColor().colorCheck("Username cambiado con éxito");
+                    managerONG.cambiarNombre(managerONG.encontrarONG(new EditText("Indique el nombre de la ONG a modificar").pedirString()),new EditText("Indique el nuevo nombre").pedirString());
+                    new TextoColor().colorCheck("Nombre cambiado con éxito");
+                    new EditText("Pulse intro para continuar").esperar();
                 }catch (Exception e){
                     new TextoColor().colorError("No existe una ONG con ese nombre");
                 }
-                new GestionarUsuarios().start(managerUsuario,managerONG);
+                new GestionarONGs().start(managerUsuario,managerONG);
 
                 break;
-
             case 2:
                 try {
-                    managerONG.cambiarNombrePaisONG(managerONG.encontrarONG(new EditText("Indique el pais de la ONG a modificar").pedirString()),new EditText("Indique el nuevo pais").pedirString());
-                    new TextoColor().colorCheck("Username cambiado con éxito");
+                    managerONG.crearONG((new EditText("Indique el nombre de la ONG a crear").pedirString()),new EditText("Indique los paises donde actua la ONG").pedirArrayStrings(new EditText("¿En cuantos paises actua esta ONG?").pedirInt(0,10)));
+                    new TextoColor().colorCheck("ONG creada con éxito");
+                    new EditText("Pulse intro para continuar").esperar();
                 }catch (Exception e){
-                    new TextoColor().colorError("No existe esa ONG");
+                    new TextoColor().colorError("No se pudo crear la ONG");
                 }
-                new GestionarUsuarios().start(managerUsuario, managerONG);
-
-                break;
-
-
-
+                new GestionarONGs().start(managerUsuario,managerONG);
             case 3:
+                try {
+                    managerONG.borrarONG(managerONG.encontrarONG (new EditText("Indique el nombre de la ONG a modificar").pedirString()));
+                    new TextoColor().colorCheck("ONG borrada con éxito");
+                    new EditText("Pulse intro para continuar").esperar();
+                }catch (Exception e){
+                    new TextoColor().colorError("No se pudo borrar la ONG");
+                }
+                new GestionarONGs().start(managerUsuario,managerONG);
+                break;
+            case 4:
+                new Menu(managerUsuario.usuarios.length,1).show("\nLista de ONGs",managerONG.listarONGs());
+                new EditText("Pulse intro para continuar").esperar();
+                new GestionarONGs().start(managerUsuario,managerONG);
+                break;
+            case 5:
                 new MenuUsuario().startMenuUsuario(managerUsuario, managerONG);
-
+                break;
             default:
+                new TextoColor().colorError("Opción Inválida");
+                new EditText("Pulse intro para continuar").esperar();
+                new GestionarONGs().start(managerUsuario, managerONG);
                 break;
         }
     }
-
 }

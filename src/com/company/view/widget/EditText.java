@@ -23,6 +23,16 @@ public class EditText {
         return mensaje;
     }
 
+    public String[] pedirArrayStrings(int longitud){
+        String[] mensaje = new String[longitud];
+
+        for (int i = 0; i <longitud ; i++) {
+            mensaje[i]=pedirString();
+        }
+
+        return mensaje;
+    }
+
     public int pedirInt(int min, int max){
         int numero=0;
         boolean isNum=false;
