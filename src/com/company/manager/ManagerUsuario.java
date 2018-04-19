@@ -6,7 +6,7 @@ import com.company.view.widget.EditText;
 
 public class ManagerUsuario {
 
-    Usuario[] usuarios = new Usuario[100];
+    public Usuario[] usuarios = new Usuario[100];
     public Usuario usuarioConectado;
 
     public void crearUsuario(String nombre,String apellido,String username,String contraseña,String telefono,
@@ -152,6 +152,30 @@ public class ManagerUsuario {
         long cuenta = new EditText("Cuenta bancaria: ").pedirLong();
 
         crearUsuario(nombre,apellido,usuario,contraseña,telefono,DNI,correo,dinero,cuenta);
+    }
+
+    public int cantidadUsuarios() {
+        for (int i = 0; i < usuarios.length; i++) {
+
+            if (usuarios[i] == null) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    public String[] listaUsuarios() {
+        String[] lista = new String[cantidadUsuarios()];
+
+        for (int i = 0; i < usuarios.length; i++) {
+            if (usuarios[i] != null) {
+                lista[i] = "ID:"+(Integer.toString(usuarios[i].id)+" ");
+                lista[i] +="Username:"+usuarios[i].usuario+" ";
+                lista[i] +="Nombre:"+usuarios[i].nombre+" ";
+                lista[i] +="Apellido:"+usuarios[i].apellido+" ";
+            }
+        }
+        return lista;
     }
 
 }
