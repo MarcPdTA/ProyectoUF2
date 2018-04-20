@@ -8,7 +8,7 @@ import com.company.view.widget.TextoColor;
 
 public class GestionarUsuarios {
 
-    Menu menu = new Menu(11,1);
+    Menu menu = new Menu(12,1);
 
 
     public void start(ManagerUsuario managerUsuario, ManagerONG managerONG){

@@ -10,7 +10,7 @@ public class GestionarONGs {
 
     public void start(ManagerUsuario managerUsuario, ManagerONG managerONG) {
 
-        Menu menu = new Menu(11, 1);
+        Menu menu = new Menu(5, 1);
 
 
         menu.showMenuUsuario("Panel de control de ONGs", managerUsuario, managerONG, "Cambiar nombre", "Crear nueva ONG", "Eliminar ONG","Listar ONGs", "Volver al menú");
