@@ -14,7 +14,7 @@ public class Suscribirse {
 
         int cantidadDinero = new EditText("Que cantidad quiere donar mensualmente a " + managerONG.ONGs[idONG].nombre + "?  Dinero actual: "+managerUsuario.usuarioConectado.dinero+"€").pedirInt(1,1000000000);
 
-        if(managerUsuario.suscribirse(managerUsuario,cantidadDinero,managerONG.ONGs[idONG])){
+        if(managerUsuario.suscribirse2(managerUsuario,cantidadDinero,managerONG.ONGs[idONG])){
             new TextoColor().colorCheck("¡Se ha suscrito a " + managerONG.ONGs[idONG].nombre + "!");
             new MisSuscripciones().start(managerUsuario, managerONG);
         }else{

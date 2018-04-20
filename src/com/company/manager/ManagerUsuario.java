@@ -1,6 +1,7 @@
 package com.company.manager;
 
 import com.company.model.ONG;
+import com.company.model.Suscripcion;
 import com.company.model.Usuario;
 import com.company.view.widget.EditText;
 
@@ -89,6 +90,26 @@ public class ManagerUsuario {
             for (int i = 0; i <managerUsuario.usuarioConectado.suscripciones.length ; i++) {
                 if(managerUsuario.usuarioConectado.suscripciones[i] == null) {
                     managerUsuario.usuarioConectado.suscripciones[i] = "ID# " + (ong.id+1) + " Nombre: " + ong.nombre +" Cantidad mensual: " + dinero;
+                    break;
+                }
+            }
+
+            managerUsuario.usuarioConectado.dinero-=dinero;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean suscribirse2(ManagerUsuario managerUsuario, int dinero,  ONG ong){
+        if(managerUsuario.usuarioConectado.dinero>= dinero){
+            for (int i = 0; i <managerUsuario.usuarioConectado.suscripcions.length ; i++) {
+                if(managerUsuario.usuarioConectado.suscripcions[i] == null) {
+                    Suscripcion suscripcion = new Suscripcion();
+                    suscripcion.id = ong.id+1;
+                    suscripcion.nombre = ong.nombre;
+                    suscripcion.cantidad = dinero;
+
+                    managerUsuario.usuarioConectado.suscripcions[i] = suscripcion;
                     break;
                 }
             }
