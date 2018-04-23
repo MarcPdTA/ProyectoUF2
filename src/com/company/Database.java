@@ -75,7 +75,7 @@ public class Database {
             System.out.println(e.getMessage());
         }
     }
-
+//
     public void insertONG(String nombre, String pais) {
         String sql = "INSERT INTO ongs(nombre, pais) VALUES(?,?)";
 
