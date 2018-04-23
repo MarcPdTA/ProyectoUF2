@@ -29,6 +29,4 @@ public class MisSuscripciones {
 
         new MenuUsuario().startMenuUsuario(managerUsuario, managerONG);
     }
-
-
 }

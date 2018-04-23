@@ -1,5 +1,6 @@
 package com.company.view.screens;
 
+import com.company.Database;
 import com.company.manager.ManagerONG;
 import com.company.manager.ManagerUsuario;
 import com.company.view.widget.EditText;
@@ -17,7 +18,7 @@ public class GestionarONGs {
         switch (menu.option()) {
             case 1:
                 try {
-                    managerONG.cambiarNombre(managerONG.encontrarONG(new EditText("Indique el nombre de la ONG a modificar").pedirString()),new EditText("Indique el nuevo nombre").pedirString());
+                    managerONG.cambiarNombre(Database.get().encontrarONG(new EditText("Indique el nombre a cambiar").pedirString()), new EditText("Indique el nuevo nombre");
                     new TextoColor().colorCheck("Nombre cambiado con éxito");
                     new EditText("Pulse intro para continuar").esperar();
                 }catch (Exception e){
@@ -28,7 +29,7 @@ public class GestionarONGs {
                 break;
             case 2:
                 try {
-                    managerONG.crearONG((new EditText("Indique el nombre de la ONG a crear").pedirString()),new EditText("Indique los paises donde actua la ONG").pedirArrayStrings(new EditText("¿En cuantos paises actua esta ONG?").pedirInt(0,10)));
+                    managerONG.crearONG((new EditText("Indique el nombre de la ONG a crear").pedirString()),new EditText("Indique el pais de origen de la ONG").pedirString());
                     new TextoColor().colorCheck("ONG creada con éxito");
                     new EditText("Pulse intro para continuar").esperar();
                 }catch (Exception e){
