@@ -4,7 +4,9 @@ import com.company.Database;
 import com.company.model.ONG;
 import com.company.model.Usuario;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ManagerONG {
 
@@ -17,7 +19,7 @@ public class ManagerONG {
 
 
     public boolean cambiarNombre(String nombreViejo, String nombreNuevo) {
-         return Database.get().cambiarNombreONG(nombreViejo, nombreNuevo);
+        return Database.get().cambiarNombreONG(nombreViejo, nombreNuevo);
     }
 
 
@@ -30,17 +32,17 @@ public class ManagerONG {
         }
     }
 
-    public String[] listarONGs(){
-        String[] lista = new String[cantidadONG()];
+    public List<String> listarONGs() {
+        List<ONG> lista = Database.get().selectTodasONGS();
 
-        for (int i = 0; i < ONGs.length; i++) {
-            if (ONGs[i] != null) {
-                lista[i] = "ID:"+(Integer.toString(ONGs[i].id)+" ");
-                lista[i] +="Nombre:"+ONGs[i].nombre+" ";
-                lista[i] +="Paises de acción:"+ Arrays.toString(ONGs[i].nombresPais)+" ";
+        List<String> listaNombres = new ArrayList<>();
 
-            }
+
+        for(ONG ong: lista){
+            listaNombres.add(ong.nombre);
         }
-        return lista;
+
+        return listaNombres;
+
     }
 }
