@@ -172,5 +172,20 @@ public class Database {
             }
         return null;
     }
+    public boolean cambiarNombreONG(String nombreViejo, String nombreNuevo){
+        if(encontrarONG(nombreViejo)!=null){
+            String sql = "UPDATAE ongs SET nombre = '?' WHERE nombre = '?'";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, nombreNuevo);
+                pstmt.setString(2, nombreViejo);
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
 }
 

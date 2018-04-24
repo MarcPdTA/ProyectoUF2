@@ -16,8 +16,8 @@ public class ManagerONG {
     }
 
 
-    public boolean cambiarNombre(String viejoNombre, String nuevoNombre) {
-
+    public boolean cambiarNombre(String nombreViejo, String nombreNuevo) {
+         return Database.get().cambiarNombreONG(nombreViejo, nombreNuevo);
     }
 
 
