@@ -10,11 +10,11 @@ import java.util.List;
 
 public class ManagerONG {
 
-    public void crearONG(String nombre, String pais) {
+    public boolean crearONG(String nombre, String pais) {
         if (!Database.get().existeONG(nombre)) {
-
-            Database.get().insertONG(nombre, pais);
+            return Database.get().insertONG(nombre, pais);
         }
+        return false;
     }
 
 
@@ -23,26 +23,20 @@ public class ManagerONG {
     }
 
 
-    public void borrarONG(ONG ong) {
-
-        for (int i = 0; i < ONGs.length; i++) {
-            if (ONGs[i] != null && ONGs[i].nombre.equals(ong.nombre)) {
-                ONGs[i] = null;
-            }
-        }
+    public boolean borrarONG(String nombreONG) {
+        return Database.get().borrarONG(nombreONG);
     }
 
     public List<String> listarONGs() {
         List<ONG> lista = Database.get().selectTodasONGS();
-
         List<String> listaNombres = new ArrayList<>();
-
-
         for(ONG ong: lista){
             listaNombres.add(ong.nombre);
         }
-
         return listaNombres;
+    }
 
+    public int contarONGs(){
+        return Database.get().contarONGs();
     }
 }

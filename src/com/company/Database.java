@@ -3,6 +3,8 @@ package com.company;
 
 import com.company.model.ONG;
 
+import javax.xml.soap.Text;
+import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +78,7 @@ public class Database {
         }
     }
 //
-    public void insertONG(String nombre, String pais) {
+    public boolean insertONG(String nombre, String pais) {
         String sql = "INSERT INTO ongs(nombre, pais) VALUES(?,?)";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -85,7 +87,9 @@ public class Database {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return false;
         }
+        return true;
     }
 
     public void selectEstudiantesConNotaSuperiorA(double nota){
@@ -174,7 +178,7 @@ public class Database {
     }
     public boolean cambiarNombreONG(String nombreViejo, String nombreNuevo){
         if(encontrarONG(nombreViejo)!=null){
-            String sql = "UPDATAE ongs SET nombre = '?' WHERE nombre = '?'";
+            String sql = "UPDATAE ongs SET nombre = ? WHERE nombre = ?";
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, nombreNuevo);
                 pstmt.setString(2, nombreViejo);
@@ -187,5 +191,43 @@ public class Database {
         }
         return false;
     }
+    public boolean borrarONG(String nombreONG){
+        if(encontrarONG(nombreONG)!=null){
+            String sql = "DELETE FROM ongs WHERE nombre = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, nombreONG);
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    public int contarONGs(){
+        String sql = "SELECT COUNT(*) FROM ongs";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            return pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+        return 0;
+    }
+
+    public String id_nombreONG(int id){
+        String sql = "SELECT nombre FROM ongs WHERE id= ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            return pstmt.executeUpdate(); /////////////////////////DUDA A GERARD SOBRE ESTO.
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+    }
 }
+
 

@@ -18,7 +18,7 @@ public class GestionarONGs {
         switch (menu.option()) {
             case 1:
                 try {
-                    managerONG.cambiarNombre(Database.get().encontrarONG(new EditText("Indique el nombre a cambiar").pedirString()), new EditText("Indique el nuevo nombre");
+                    managerONG.cambiarNombre(Database.get().encontrarONG(new EditText("Indique el nombre a cambiar").pedirString()), new EditText("Indique el nuevo nombre").pedirString());
                     new TextoColor().colorCheck("Nombre cambiado con éxito");
                     new EditText("Pulse intro para continuar").esperar();
                 }catch (Exception e){
@@ -28,26 +28,25 @@ public class GestionarONGs {
 
                 break;
             case 2:
-                try {
-                    managerONG.crearONG((new EditText("Indique el nombre de la ONG a crear").pedirString()),new EditText("Indique el pais de origen de la ONG").pedirString());
+                if(managerONG.crearONG(new EditText("Indique el nombre de la ONG a crear").pedirString(),new EditText("Indique el pais de la ONG a crear").pedirString())) {
                     new TextoColor().colorCheck("ONG creada con éxito");
                     new EditText("Pulse intro para continuar").esperar();
-                }catch (Exception e){
+                }else {
                     new TextoColor().colorError("No se pudo crear la ONG");
                 }
                 new GestionarONGs().start(managerUsuario,managerONG);
+                new GestionarONGs().start(managerUsuario,managerONG);
             case 3:
-                try {
-                    managerONG.borrarONG(managerONG.encontrarONG (new EditText("Indique el nombre de la ONG a modificar").pedirString()));
+                if(managerONG.borrarONG(new EditText("Indique el nombre de la ONG a borrar").pedirString())) {
                     new TextoColor().colorCheck("ONG borrada con éxito");
                     new EditText("Pulse intro para continuar").esperar();
-                }catch (Exception e){
+                }else {
                     new TextoColor().colorError("No se pudo borrar la ONG");
                 }
                 new GestionarONGs().start(managerUsuario,managerONG);
                 break;
             case 4:
-                new Menu(managerUsuario.usuarios.length,1).show("\nLista de ONGs",managerONG.listarONGs());
+                new Menu(managerUsuario.usuarios.length,1).showList("\nLista de ONGs",managerONG.listarONGs());
                 new EditText("Pulse intro para continuar").esperar();
                 new GestionarONGs().start(managerUsuario,managerONG);
                 break;
