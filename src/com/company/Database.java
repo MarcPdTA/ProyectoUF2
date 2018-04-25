@@ -208,9 +208,12 @@ public class Database {
     }
 
     public int contarONGs(){
-        String sql = "SELECT COUNT(*) FROM ongs";
+        String sql = "SELECT COUNT(*) AS cuenta FROM ongs";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            return pstmt.executeUpdate();
+            ResultSet rs = pstmt.executeQuery(); /////////////////////////DUDA A GERARD SOBRE ESTO.
+            while (rs.next()){
+                return rs.getInt("cuenta");
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
 
@@ -222,7 +225,11 @@ public class Database {
         String sql = "SELECT nombre FROM ongs WHERE id= ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, id);
-            return pstmt.executeUpdate(); /////////////////////////DUDA A GERARD SOBRE ESTO.
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                return rs.getString("nombre");
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
 
