@@ -1,7 +1,9 @@
 package com.company;
 
 
+import com.company.model.Donacion;
 import com.company.model.ONG;
+import com.company.model.Usuario;
 
 import javax.xml.soap.Text;
 import java.awt.*;
@@ -72,7 +74,7 @@ public class Database {
     void createTables(){
         try (Statement stmt = conn.createStatement()) {
             stmt.execute("CREATE TABLE IF NOT EXISTS ongs (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,nombre text, pais text);");
-            stmt.execute("CREATE TABLE IF NOT EXISTS usuarios (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nombre text, apellido text, usuario text, contraseña text, telefono text, DNI text, correo text, dinero INTEGER, admin INTEGER DEFAULT 0);");
+            stmt.execute("CREATE TABLE IF NOT EXISTS usuarios (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nombre text, apellido text, usuario text, contraseña text, telefono text, DNI text, correo text, dinero INTEGER, cuenta INTEGER, admin INTEGER DEFAULT 0);");
             stmt.execute("CREATE TABLE IF NOT EXISTS suscripciones (usuarioID INTEGER NOT NULL,ongID INTEGER NOT NULL, dinero INTEGER);");
             stmt.execute("CREATE TABLE IF NOT EXISTS donaciones (usuarioID INTEGER NOT NULL,ongID INTEGER NOT NULL, dinero INTEGER);");
         } catch (SQLException e) {
@@ -203,7 +205,7 @@ public class Database {
 
 
     public boolean existeUsuario(String usuario){
-        String sql = "SELECT nombre FROM usuarios WHERE nombre = ?";
+        String sql = "SELECT usuario FROM usuarios WHERE usuario = ?";
         try (PreparedStatement pstmt  = conn.prepareStatement(sql)){
 
             pstmt.setString(1, usuario);
@@ -226,7 +228,7 @@ public class Database {
 
     public boolean insertUsuario(String nombre,String apellido,String username,String contraseña,String telefono,
                                  String DNI, String correo,int dinero, long cuenta) {
-        String sql = "INSERT INTO usuarios(nombre, apellidos, username, contraseña, telefono, DNI, correo, dinero, cuenta) VALUES(?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO usuarios(nombre, apellido, usuario, contraseña, telefono, DNI, correo, dinero, cuenta) VALUES(?,?,?,?,?,?,?,?,?)";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, nombre);
@@ -273,7 +275,7 @@ public class Database {
     }
 
     public boolean borrarUsuario(String username){
-        if(existeONG(username)){
+        if(existeUsuario(username)){
             String sql = "DELETE FROM usuarios WHERE usuario = ?";
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, username);
@@ -321,7 +323,7 @@ public class Database {
     }
 
     public boolean ingresarDinero(int usuarioID,int dinero) {
-        String sql = "UPDATE usuarios SET dinero = ? WHERE usuarioID = ?";
+        String sql = "UPDATE usuarios SET dinero = dinero + ? WHERE ID = ?";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, dinero);
@@ -334,6 +336,282 @@ public class Database {
         }
         return true;
     }
+
+    public boolean concederPermisoAdministrador(String username) {
+        String sql = "UPDATE usuarios SET admin = 1 WHERE usuario = ?";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, username);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+
+        }
+       return true;
+    }
+
+    public boolean cambiarNombreUsuario(String username, String nombreNuevo){
+        if(existeUsuario(username)){
+            String sql = "UPDATE usuarios SET nombre = ? WHERE usuario = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, nombreNuevo);
+                pstmt.setString(2, username);
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public boolean cambiarApellidoUsuario(String username, String nombreNuevo){
+        if(existeUsuario(username)){
+            String sql = "UPDATE usuarios SET apellido = ? WHERE usuario = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, nombreNuevo);
+                pstmt.setString(2, username);
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public boolean cambiarUsernameUsuario(String username, String usernameNuevo){
+        if(existeUsuario(username)){
+            String sql = "UPDATE usuarios SET usuario = ? WHERE usuario = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, usernameNuevo);
+                pstmt.setString(2, username);
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public boolean cambiarContraseñaUsuario(String username, String contraseñaNueva){
+        if(existeUsuario(username)){
+            String sql = "UPDATE usuarios SET contraseña = ? WHERE usuario = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, contraseñaNueva);
+                pstmt.setString(2, username);
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public boolean cambiarTelefonoUsuario(String username, String telefonoNuevo){
+        if(existeUsuario(username)){
+            String sql = "UPDATE usuarios SET telefono = ? WHERE usuario = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, telefonoNuevo);
+                pstmt.setString(2, username);
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public boolean cambiarDNIUsuario(String username, String DNInuevo){
+        if(existeUsuario(username)){
+            String sql = "UPDATE usuarios SET DNI = ? WHERE usuario = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, DNInuevo);
+                pstmt.setString(2, username);
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public boolean cambiarCorreoUsuario(String username, String correoNuevo){
+        if(existeUsuario(username)){
+            String sql = "UPDATE usuarios SET correo = ? WHERE usuario = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, correoNuevo);
+                pstmt.setString(2, username);
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public int contarUsuarios(){
+        String sql = "SELECT COUNT(*) AS cuenta FROM usuarios";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                return rs.getInt("cuenta");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+        return 0;
+    }
+
+    public List<Usuario> selectTodosUsuarios(){
+        String sql = "SELECT * FROM usuarios";
+
+        List<Usuario> resultado = new ArrayList<>();
+
+        try (Statement stmt  = conn.createStatement()){
+
+            ResultSet rs  = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                Usuario usuario = new Usuario();
+                usuario.id = rs.getInt("id");
+                usuario.nombre = rs.getString("nombre");
+                usuario.apellido = rs.getString("apellido");
+                usuario.usuario = rs.getString("usuario");
+                usuario.contraseña = rs.getString("contraseña");
+                usuario.telefono = rs.getString("telefono");
+                usuario.DNI = rs.getString("DNI");
+                usuario.correo = rs.getString("correo");
+                usuario.dinero = rs.getInt("dinero");
+                usuario.cuenta=rs.getInt("cuenta");
+                usuario.admin = rs.getInt("admin");
+
+                resultado.add(usuario);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return resultado;
+    }
+
+
+    public int usernameToIdUsuario(String username){
+        String sql = "SELECT id FROM usuarios WHERE usuario = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, username);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                return rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+        return 0;
+    }
+
+    public int devolverIntValueUsuario(String parametro, int id){
+        String sql = "SELECT "+parametro+" AS respuesta FROM usuarios WHERE id = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                return rs.getInt("respuesta");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+        return 0;
+    }
+
+    public String devolverStringValueUsuario(String parametro, int id){
+        String sql = "SELECT "+parametro+" AS respuesta FROM usuarios WHERE id= ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                return rs.getString("respuesta");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+        return null;
+    }
+
+    public List<Donacion> donacionesUsuarioConectado(int id){
+
+        String sql = "SELECT * FROM donaciones WHERE usuarioID = ?";
+
+        List<Donacion> resultado = new ArrayList<>();
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1, id);
+
+            ResultSet rs  = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Donacion donacion = new Donacion();
+                donacion.usuarioID=rs.getInt("usuarioID");
+                donacion.ongID=rs.getInt("ongID");
+                donacion.dinero=rs.getInt("dinero");
+
+                resultado.add(donacion);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return resultado;
+    }
+
+    public List<Donacion> suscripcionesUsuarioConectado(int id){
+        String sql = "SELECT * FROM suscripciones WHERE usuarioID = ?";
+
+        List<Donacion> resultado = new ArrayList<>();
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1, id);
+
+            ResultSet rs  = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Donacion donacion = new Donacion();
+                donacion.usuarioID=rs.getInt("usuarioID");
+                donacion.ongID=rs.getInt("ongID");
+                donacion.dinero=rs.getInt("dinero");
+
+                resultado.add(donacion);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return resultado;
+    }
+
 }
+
+
+
 
 

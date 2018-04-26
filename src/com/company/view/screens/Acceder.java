@@ -10,7 +10,6 @@ public class Acceder {
     String usuario;
     String contraseña;
     public void start(ManagerUsuario managerUsuario, ManagerONG managerONG){
-        boolean noValido;
 
         MenuUsuario menuUsuario = new MenuUsuario();
         do {

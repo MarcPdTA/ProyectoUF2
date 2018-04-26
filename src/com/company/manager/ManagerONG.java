@@ -27,16 +27,16 @@ public class ManagerONG {
         return Database.get().borrarONG(nombreONG);
     }
 
-    public List<String> listarONGs() {
-        List<ONG> lista = Database.get().selectTodasONGS();
-        List<String> listaNombres = new ArrayList<>();
-        for(ONG ong: lista){
-            listaNombres.add("ID# "+ong.id+" Nombre: "+ong.nombre+" País de origen: "+ong.pais);
-        }
-        return listaNombres;
+    public List<ONG> listarONGs() {
+        return Database.get().selectTodasONGS();
+
     }
 
     public int contarONGs(){
         return Database.get().contarONGs();
+    }
+
+    public String idToStringONG(int id){
+        return Database.get().id_nombreONG(id);
     }
 }

@@ -12,11 +12,8 @@ public class Usuario {
     public String DNI;
     public String correo;
     public int dinero;
-    public String[] donaciones = new String[10];
-    public String[] suscripciones = new String[10];
-    public Suscripcion[] suscripcions = new Suscripcion[10];
     public long cuenta;
-    public boolean admin = false;
-    ///CREAR LA CLASE SUSCRIPCIONES Y HACER UNA TABLA CON LOS DATOS AL MOSTRAR "MisSuscripciones"
+    public int admin;
+
 
 }

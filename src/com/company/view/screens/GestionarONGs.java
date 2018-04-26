@@ -1,10 +1,11 @@
 package com.company.view.screens;
 
-import com.company.Database;
+
 import com.company.manager.ManagerONG;
 import com.company.manager.ManagerUsuario;
 import com.company.view.widget.EditText;
 import com.company.view.widget.Menu;
+import com.company.view.widget.Tabla;
 import com.company.view.widget.TextoColor;
 
 public class GestionarONGs {
@@ -47,7 +48,7 @@ public class GestionarONGs {
                 new GestionarONGs().start(managerUsuario,managerONG);
                 break;
             case 4:
-                new Menu(managerUsuario.usuarios.length,1).showList("\nLista de ONGs",managerONG.listarONGs());
+                new Tabla().tablaONGs(managerONG);
                 new EditText("Pulse intro para continuar").esperar();
                 new GestionarONGs().start(managerUsuario,managerONG);
                 break;

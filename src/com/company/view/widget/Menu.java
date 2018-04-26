@@ -32,7 +32,7 @@ public class Menu {
     }
 
     public void showMenuUsuario(String titulo,ManagerUsuario managerUsuario, ManagerONG managerONG, String ...lista){
-        System.out.println(titulo + " ::: " + managerUsuario.usuarioConectado.usuario + " ::: " + "Dinero actual: "+managerUsuario.usuarioConectado.dinero+"€\n");
+        System.out.println(titulo + " ::: " + managerUsuario.devolverStringValue("usuario",managerUsuario.usuarioConectado) + " ::: " + "Dinero actual: "+managerUsuario.devolverIntValue("dinero",managerUsuario.usuarioConectado)+"€\n");
 
         for (int i = 0; i <lista.length ; i++) {
 
@@ -52,7 +52,7 @@ public class Menu {
     }
 
     public void showMenuUsuarioLista(String titulo,ManagerUsuario managerUsuario, ManagerONG managerONG, List<String> lista){
-        System.out.println(titulo + " ::: " + managerUsuario.usuarioConectado.usuario + " ::: " + "Dinero actual: "+managerUsuario.usuarioConectado.dinero+"€\n");
+        System.out.println(titulo + " ::: " + managerUsuario.devolverStringValue("usuario",managerUsuario.usuarioConectado) + " ::: " + "Dinero actual: "+managerUsuario.devolverIntValue("dinero",managerUsuario.usuarioConectado)+"€\n");
 
         for (int i = 0; i <lista.size() ; i++) {
 

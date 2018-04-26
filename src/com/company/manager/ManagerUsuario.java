@@ -1,39 +1,42 @@
 package com.company.manager;
 
 import com.company.Database;
+import com.company.model.Donacion;
 import com.company.model.ONG;
 import com.company.model.Suscripcion;
 import com.company.model.Usuario;
 import com.company.view.widget.EditText;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ManagerUsuario {
 
-    int usuarioConectado;
+    public int usuarioConectado;
 
-    public void crearUsuario(String nombre,String apellido,String username,String contraseña,String telefono,
-                             String DNI, String correo,int dinero, long cuenta){
-        if(!Database.get().existeUsuario(nombre)) {
+    public void crearUsuario(String nombre, String apellido, String username, String contraseña, String telefono,
+                             String DNI, String correo, int dinero, long cuenta) {
+        if (!Database.get().existeUsuario(nombre)) {
 
-            Database.get().insertUsuario(nombre,apellido,username,contraseña,telefono,
-                    DNI,correo,dinero,cuenta);
-            }
+            Database.get().insertUsuario(nombre, apellido, username, contraseña, telefono,
+                    DNI, correo, dinero, cuenta);
+        }
+    }
+
+    public boolean verificarUsuario(String username, String contraseña) {
+
+        if (Database.get().verificarUsuario(username, contraseña)){
+            usuarioConectado=Database.get().usernameToIdUsuario(username);
+            return true;
         }
 
-    public boolean usuarioExiste(String username){
-
-        return Database.get().existeUsuario(username);
-
-        }
-
-    public boolean verificarUsuario(String username, String contraseña){
-
-        return Database.get().verificarUsuario(username,contraseña);
+        return false;
 
     }
 
-    public boolean borrarUsuario(String usuario){
+    public boolean borrarUsuario(String username) {
 
-      return Database.get().borrarUsuario(usuario);
+        return Database.get().borrarUsuario(username);
 
     }
 
@@ -42,79 +45,104 @@ public class ManagerUsuario {
         return Database.get().insertDonacion(usuarioID, ongID, dinero);
     }
 
-    public boolean suscribirse(ManagerUsuario managerUsuario, int dinero, int usuarioID, int ongID){
+    public boolean suscribirse(ManagerUsuario managerUsuario, int dinero, int usuarioID, int ongID) {
 
-        return Database.get().insertSuscripcion(usuarioID,ongID,dinero);
+        return Database.get().insertSuscripcion(usuarioID, ongID, dinero);
     }
 
-    public void ingresar(int usuarioID, int dinero){
-        Database.get().ingresarDinero(usuarioID,dinero);
+    public void ingresar(int usuarioID, int dinero) {
+        Database.get().ingresarDinero(usuarioID, dinero);
 
     }
 
 
-    public void concederPermisoAdministrador(Usuario usuario){
-        usuario.admin=true;
+    public boolean concederPermisoAdministrador(String username) {
+        if(Database.get().existeUsuario(username)){
+            return Database.get().concederPermisoAdministrador(username);
+        }
+        return false;
     }
 
-    public void cambiarNombre(Usuario usuario,String nuevoNombre){
-        usuario.nombre=nuevoNombre;
+    public boolean cambiarNombre(String username, String nombreNuevo) {
+        if(Database.get().existeUsuario(username)){
+            return Database.get().cambiarNombreUsuario(username, nombreNuevo);
+        }
+        return false;
     }
 
-    public void cambiarApellido(Usuario usuario,String nuevoApellido){
-        usuario.apellido=nuevoApellido;
+    public boolean cambiarApellido(String username, String nuevoApellido) {
+        if(Database.get().existeUsuario(username)){
+            return Database.get().cambiarApellidoUsuario(username, nuevoApellido);
+        }
+        return false;
     }
 
-    public void cambiarNombreUsuario(Usuario usuario,String nuevoNombreUsuario){
-        usuario.usuario=nuevoNombreUsuario;
+    public boolean cambiarNombreUsuario(String username, String nuevoNombreUsuario) {
+        if(Database.get().existeUsuario(username)){
+            return Database.get().cambiarUsernameUsuario(username, nuevoNombreUsuario);
+        }
+        return false;
     }
 
-    public void cambiarContraseña(Usuario usuario,String nuevaContraseña){
-        usuario.contraseña=nuevaContraseña;
+    public boolean cambiarContraseña(String username, String nuevaContraseña) {
+        if(Database.get().existeUsuario(username)){
+            return Database.get().cambiarContraseñaUsuario(username, nuevaContraseña);
+        }
+        return false;
     }
 
-    public void cambiarDNI(Usuario usuario, String nuevoDNI) { usuario.DNI = nuevoDNI; }
+    public boolean cambiarDNI(String username, String nuevoDNI) {
+        if(Database.get().existeUsuario(username)){
+            return Database.get().cambiarDNIUsuario(username, nuevoDNI);
+        }
+        return false;
+    }
 
-    public void cambiarCorreo(Usuario usuario, String nuevoCorreo) { usuario.correo = nuevoCorreo; }
 
-    public void cambiarTelefono(Usuario usuario, String nuevoTelefono) { usuario.telefono = nuevoTelefono; }
+    public boolean cambiarCorreo(String username, String nuevoCorreo) {
+        if(Database.get().existeUsuario(username)){
+            return Database.get().cambiarCorreoUsuario(username, nuevoCorreo);
+        }
+        return false;
 
-    public void crearUsuarioAdmin(){
-        String nombre = new EditText("Nombre: ").pedirString();
-        String apellido = new EditText("Apellidos: ").pedirString();
-        String contraseña = new EditText("Contraseña: ").pedirString();
-        String usuario = new EditText("Nombre de usuario: ").pedirString();
-        String telefono = new EditText("Telefono: ").pedirString();
-        String DNI = new EditText("DNI: ").pedirString();
-        String correo = new EditText("Correo electronico: ").checkEmail();
-        int dinero = new EditText("Ingreso inicial: ").pedirInt(0, 1000000000);
-        long cuenta = new EditText("Cuenta bancaria: ").pedirLong();
+    }
 
-        crearUsuario(nombre,apellido,usuario,contraseña,telefono,DNI,correo,dinero,cuenta);
+    public boolean cambiarTelefono(String username, String nuevoTelefono) {
+        if(Database.get().existeUsuario(username)){
+            return Database.get().cambiarTelefonoUsuario(username, nuevoTelefono);
+        }
+        return false;
+
     }
 
     public int cantidadUsuarios() {
-        for (int i = 0; i < usuarios.length; i++) {
-
-            if (usuarios[i] == null) {
-                return i;
-            }
-        }
-        return 0;
+        return Database.get().contarUsuarios();
     }
 
-    public String[] listaUsuarios() {
-        String[] lista = new String[cantidadUsuarios()];
+    public List<Usuario> listaUsuarios() {
 
-        for (int i = 0; i < usuarios.length; i++) {
-            if (usuarios[i] != null) {
-                lista[i] = "ID:"+(Integer.toString(usuarios[i].id)+" ");
-                lista[i] +="Username:"+usuarios[i].usuario+" ";
-                lista[i] +="Nombre:"+usuarios[i].nombre+" ";
-                lista[i] +="Apellido:"+usuarios[i].apellido+" ";
-            }
-        }
-        return lista;
+        return Database.get().selectTodosUsuarios();
+    }
+
+
+    public int devolverIntValue(String parametro,int id){
+
+        return Database.get().devolverIntValueUsuario(parametro,id);
+
+    }
+
+    public String devolverStringValue(String parametro,int id){
+
+        return Database.get().devolverStringValueUsuario(parametro,id);
+
+    }
+
+    public List<Donacion> donacionesUsuarioConectado(){
+        return Database.get().donacionesUsuarioConectado(usuarioConectado);
+    }
+
+    public List<Donacion> suscripcionesUsuarioConectado(){
+        return Database.get().suscripcionesUsuarioConectado(usuarioConectado);
     }
 
 }
