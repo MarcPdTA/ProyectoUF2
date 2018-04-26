@@ -82,7 +82,31 @@ public class Database {
         }
     }
 //
-    public boolean insertONG(String nombre, String pais) {
+
+    public boolean suficienteDinero(int usuarioID, int dinero) {
+
+        String sql = "SELECT dinero FROM usuarios WHERE ID = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, usuarioID);
+
+            ResultSet rs  = pstmt.executeQuery();
+            while (rs.next()) {
+                int dineroActual=rs.getInt("dinero");
+                if(dineroActual>=dinero){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return false;
+
+    }
+        public boolean insertONG(String nombre, String pais) {
         String sql = "INSERT INTO ongs(nombre, pais) VALUES(?,?)";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -292,27 +316,48 @@ public class Database {
 
     public boolean insertDonacion(int usuarioID, int ongID,int dinero) {
         String sql = "INSERT INTO donaciones(usuarioID, ongID, dinero) VALUES(?,?,?)";
+        if(suficienteDinero(usuarioID,dinero)){
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, usuarioID);
+                pstmt.setInt(2, ongID);
+                pstmt.setInt(3, dinero);
 
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, usuarioID);
-            pstmt.setInt(2, ongID);
-            pstmt.setInt(3, dinero);
-
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return false;
+                pstmt.executeUpdate();
+                retirarDinero(usuarioID,dinero);
+                return true;
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+                }
         }
-        return true;
+        return false;
     }
 
     public boolean insertSuscripcion(int usuarioID, int ongID,int dinero) {
         String sql = "INSERT INTO suscripciones(usuarioID, ongID, dinero) VALUES(?,?,?)";
+        if(suficienteDinero(usuarioID,dinero)) {
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, usuarioID);
+                pstmt.setInt(2, ongID);
+                pstmt.setInt(3, dinero);
+
+                pstmt.executeUpdate();
+                retirarDinero(usuarioID,dinero);
+                return true;
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public boolean ingresarDinero(int usuarioID,int dinero) {
+        String sql = "UPDATE usuarios SET dinero = dinero + ? WHERE ID = ?";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, usuarioID);
-            pstmt.setInt(2, ongID);
-            pstmt.setInt(3, dinero);
+            pstmt.setInt(1, dinero);
+            pstmt.setInt(2, usuarioID);
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -322,8 +367,8 @@ public class Database {
         return true;
     }
 
-    public boolean ingresarDinero(int usuarioID,int dinero) {
-        String sql = "UPDATE usuarios SET dinero = dinero + ? WHERE ID = ?";
+    public boolean retirarDinero(int usuarioID,int dinero) {
+        String sql = "UPDATE usuarios SET dinero = dinero - ? WHERE ID = ?";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, dinero);
