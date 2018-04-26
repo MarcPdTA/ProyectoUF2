@@ -1,5 +1,6 @@
 package com.company.manager;
 
+import com.company.Database;
 import com.company.model.ONG;
 import com.company.model.Suscripcion;
 import com.company.model.Usuario;
@@ -7,133 +8,50 @@ import com.company.view.widget.EditText;
 
 public class ManagerUsuario {
 
-    public Usuario[] usuarios = new Usuario[100];
-    public Usuario usuarioConectado;
+    int usuarioConectado;
 
     public void crearUsuario(String nombre,String apellido,String username,String contraseña,String telefono,
                              String DNI, String correo,int dinero, long cuenta){
-        if(!usuarioExiste(nombre)) {
-            Usuario usuario = new Usuario();
+        if(!Database.get().existeUsuario(nombre)) {
 
-            usuario.nombre = nombre;
-            usuario.apellido = apellido;
-            usuario.usuario = username;
-            usuario.contraseña = contraseña;
-            usuario.telefono = telefono;
-            usuario.DNI = DNI;
-            usuario.correo = correo;
-            usuario.cuenta = cuenta;
-            usuario.dinero = dinero;
-
-            for (int i = 0; i < usuarios.length; i++) {
-                if (usuarios[i] == null) {
-                    usuario.id = i;
-                    usuarios[i] = usuario;
-                    break;
-                }
-
-            }
-        }
-    }
-
-    public boolean usuarioExiste(String nombre){
-
-        for (int i = 0; i <usuarios.length ; i++) {
-            if(usuarios[i]!=null && usuarios[i].nombre.equals(nombre)){return true;
+            Database.get().insertUsuario(nombre,apellido,username,contraseña,telefono,
+                    DNI,correo,dinero,cuenta);
             }
         }
 
-        return false;
-    }
+    public boolean usuarioExiste(String username){
+
+        return Database.get().existeUsuario(username);
+
+        }
 
     public boolean verificarUsuario(String username, String contraseña){
 
-        for (int i = 0; i <usuarios.length ; i++) {
-            if(usuarios[i]!=null && usuarios[i].usuario.equals(username) && usuarios[i].contraseña.equals(contraseña)){
-                usuarioConectado=usuarios[i];
-                return true;
-            }
-        }
-
-        return false;
+        return Database.get().verificarUsuario(username,contraseña);
 
     }
 
-    public void borrarUsuario(Usuario usuario){
+    public boolean borrarUsuario(String usuario){
 
-        for (int i = 0; i <usuarios.length ; i++) {
-            if(usuarios[i]!=null && usuarios[i].usuario.equals(usuario.usuario)){
-                usuarios[i]=null;
-            }
-        }
+      return Database.get().borrarUsuario(usuario);
 
     }
 
-    public boolean hacerDonacion(ManagerUsuario managerUsuario, int dinero, ONG ong) {
-        if(managerUsuario.usuarioConectado.dinero>= dinero){
-            for (int i = 0; i <managerUsuario.usuarioConectado.donaciones.length ; i++) {
-                if(managerUsuario.usuarioConectado.donaciones[i] == null) {
-                    managerUsuario.usuarioConectado.donaciones[i] = "ID# " + (ong.id+1) + " Nombre: " + ong.nombre +" Cantidad: " + dinero;
-                    break;
-                }
-            }
+    public boolean hacerDonacion(ManagerUsuario managerUsuario, int dinero, int usuarioID, int ongID) {
 
-            managerUsuario.usuarioConectado.dinero-=dinero;
-            return true;
-        }
-
-        return false;
+        return Database.get().insertDonacion(usuarioID, ongID, dinero);
     }
 
-    public boolean suscribirse(ManagerUsuario managerUsuario, int dinero,  ONG ong){
-        if(managerUsuario.usuarioConectado.dinero>= dinero){
-            for (int i = 0; i <managerUsuario.usuarioConectado.suscripciones.length ; i++) {
-                if(managerUsuario.usuarioConectado.suscripciones[i] == null) {
-                    managerUsuario.usuarioConectado.suscripciones[i] = "ID# " + (ong.id+1) + " Nombre: " + ong.nombre +" Cantidad mensual: " + dinero;
-                    break;
-                }
-            }
+    public boolean suscribirse(ManagerUsuario managerUsuario, int dinero, int usuarioID, int ongID){
 
-            managerUsuario.usuarioConectado.dinero-=dinero;
-            return true;
-        }
-        return false;
+        return Database.get().insertSuscripcion(usuarioID,ongID,dinero);
     }
 
-    public boolean suscribirse2(ManagerUsuario managerUsuario, int dinero,  ONG ong){
-        if(managerUsuario.usuarioConectado.dinero>= dinero){
-            for (int i = 0; i <managerUsuario.usuarioConectado.suscripcions.length ; i++) {
-                if(managerUsuario.usuarioConectado.suscripcions[i] == null) {
-                    Suscripcion suscripcion = new Suscripcion();
-                    suscripcion.id = ong.id+1;
-                    suscripcion.nombre = ong.nombre;
-                    suscripcion.cantidad = dinero;
-
-                    managerUsuario.usuarioConectado.suscripcions[i] = suscripcion;
-                    break;
-                }
-            }
-
-            managerUsuario.usuarioConectado.dinero-=dinero;
-            return true;
-        }
-        return false;
-    }
-
-    public void ingresar(Usuario usuario, int dinero){
-        usuario.dinero += dinero;
+    public void ingresar(int usuarioID, int dinero){
+        Database.get().ingresarDinero(usuarioID,dinero);
 
     }
 
-    public Usuario encontrarUsuario(String username){
-
-        for (int i = 0; i <usuarios.length ; i++) {
-            if (usuarios[i]!=null && usuarios[i].usuario.equals(username)){
-                return usuarios[i];
-            }
-        }
-        return null;
-    }
 
     public void concederPermisoAdministrador(Usuario usuario){
         usuario.admin=true;

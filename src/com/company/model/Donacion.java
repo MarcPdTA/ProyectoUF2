@@ -1,6 +1,6 @@
 package com.company.model;
 
-public class Suscripcion {
+public class Donacion {
     public int usuarioID;
     public int ongID;
     public int dinero;

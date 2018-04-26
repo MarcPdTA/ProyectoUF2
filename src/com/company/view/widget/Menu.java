@@ -60,6 +60,7 @@ public class Menu {
                 System.out.println(i+1+ ") " +lista.get(i));
         }
         System.out.println("");
+    }
 }
 
 

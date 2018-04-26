@@ -31,7 +31,7 @@ public class ManagerONG {
         List<ONG> lista = Database.get().selectTodasONGS();
         List<String> listaNombres = new ArrayList<>();
         for(ONG ong: lista){
-            listaNombres.add(ong.nombre);
+            listaNombres.add("ID# "+ong.id+" Nombre: "+ong.nombre+" País de origen: "+ong.pais);
         }
         return listaNombres;
     }

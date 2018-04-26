@@ -99,7 +99,9 @@ public class GestionarUsuarios {
                     new EditText("Pulse intro para continuar").esperar();
                 }catch (Exception e){
                     new TextoColor().colorError("No existe un usuario con ese username");
-                }                break;
+                }
+                new GestionarUsuarios().start(managerUsuario,managerONG);
+                break;
             case 9:
                 managerUsuario.crearUsuarioAdmin();
                 break;

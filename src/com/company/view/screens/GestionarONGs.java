@@ -17,13 +17,12 @@ public class GestionarONGs {
         menu.showMenuUsuario("Panel de control de ONGs", managerUsuario, managerONG, "Cambiar nombre", "Crear nueva ONG", "Eliminar ONG","Listar ONGs", "Volver al menú");
         switch (menu.option()) {
             case 1:
-                try {
-                    managerONG.cambiarNombre(Database.get().encontrarONG(new EditText("Indique el nombre a cambiar").pedirString()), new EditText("Indique el nuevo nombre").pedirString());
+                if(managerONG.cambiarNombre((new EditText("Indique el nombre a cambiar").pedirString()), new EditText("Indique el nuevo nombre").pedirString())) {
                     new TextoColor().colorCheck("Nombre cambiado con éxito");
+                    }else{
+                        new TextoColor().colorError("No existe una ONG con ese nombre");
+                    }
                     new EditText("Pulse intro para continuar").esperar();
-                }catch (Exception e){
-                    new TextoColor().colorError("No existe una ONG con ese nombre");
-                }
                 new GestionarONGs().start(managerUsuario,managerONG);
 
                 break;
@@ -34,8 +33,9 @@ public class GestionarONGs {
                 }else {
                     new TextoColor().colorError("No se pudo crear la ONG");
                 }
+                new EditText("Pulse intro para continuar").esperar();
                 new GestionarONGs().start(managerUsuario,managerONG);
-                new GestionarONGs().start(managerUsuario,managerONG);
+
             case 3:
                 if(managerONG.borrarONG(new EditText("Indique el nombre de la ONG a borrar").pedirString())) {
                     new TextoColor().colorCheck("ONG borrada con éxito");
@@ -43,6 +43,7 @@ public class GestionarONGs {
                 }else {
                     new TextoColor().colorError("No se pudo borrar la ONG");
                 }
+                new EditText("Pulse intro para continuar").esperar();
                 new GestionarONGs().start(managerUsuario,managerONG);
                 break;
             case 4:
