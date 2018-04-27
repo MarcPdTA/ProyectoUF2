@@ -33,6 +33,9 @@ public class Tabla {
                    managerONG.listarONGs().get(i).id, managerONG.listarONGs().get(i).nombre, managerONG.listarONGs().get(i).pais);
             System.out.println();
         }
+        if(managerONG.listarONGs().size() == 0){
+            System.out.println("No hay resultados");
+        }
         System.out.println("------------------------------------------------------------");
         System.out.println("");
     }

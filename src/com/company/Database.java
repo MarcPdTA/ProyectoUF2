@@ -5,8 +5,6 @@ import com.company.model.Donacion;
 import com.company.model.ONG;
 import com.company.model.Usuario;
 
-import javax.xml.soap.Text;
-import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

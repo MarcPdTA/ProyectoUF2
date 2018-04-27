@@ -16,8 +16,10 @@ public class Menu {
         this.inicio=inicio;
     }
 
-    public void show(String titulo,String ...lista){
-        System.out.println(titulo+"\n");
+    public void show(String titulo, String ...lista){
+        WindowTitle windowTitle = new WindowTitle();
+
+        windowTitle.show(titulo);
         for (int i = 0; i <lista.length ; i++) {
 
             if(lista[i]!=null)
@@ -31,8 +33,9 @@ public class Menu {
         return (new EditText("Opción: ").pedirInt(1,longitud+(inicio-1)));
     }
 
-    public void showMenuUsuario(String titulo,ManagerUsuario managerUsuario, ManagerONG managerONG, String ...lista){
-        System.out.println(titulo + " ::: " + managerUsuario.devolverStringValue("usuario",managerUsuario.usuarioConectado) + " ::: " + "Dinero actual: "+managerUsuario.devolverIntValue("dinero",managerUsuario.usuarioConectado)+"€\n");
+    public void showMenuUsuario(String titulo, ManagerUsuario managerUsuario, ManagerONG managerONG, String ...lista){
+        WindowTitle windowTitle = new WindowTitle();
+        windowTitle.show(titulo + " ::: " + managerUsuario.devolverStringValue("usuario",managerUsuario.usuarioConectado) + " ::: " + "Dinero actual: "+managerUsuario.devolverIntValue("dinero",managerUsuario.usuarioConectado)+"€");
 
         for (int i = 0; i <lista.length ; i++) {
 
@@ -41,8 +44,11 @@ public class Menu {
         }
         System.out.println("");
     }
-    public void showList(String titulo,List<String> lista){
-        System.out.println(titulo+"\n");
+
+    public void showList(String titulo, List<String> lista){
+        WindowTitle windowTitle = new WindowTitle();
+        windowTitle.show(titulo);
+
         for (int i = 0; i <lista.size() ; i++) {
 
             if(lista.get(i)!=null)
@@ -51,8 +57,9 @@ public class Menu {
         System.out.println("");
     }
 
-    public void showMenuUsuarioLista(String titulo,ManagerUsuario managerUsuario, ManagerONG managerONG, List<String> lista){
-        System.out.println(titulo + " ::: " + managerUsuario.devolverStringValue("usuario",managerUsuario.usuarioConectado) + " ::: " + "Dinero actual: "+managerUsuario.devolverIntValue("dinero",managerUsuario.usuarioConectado)+"€\n");
+    public void showMenuUsuarioLista(String titulo, ManagerUsuario managerUsuario, ManagerONG managerONG, List<String> lista){
+        WindowTitle windowTitle = new WindowTitle();
+        windowTitle.show(titulo + " ::: " + managerUsuario.devolverStringValue("usuario",managerUsuario.usuarioConectado) + " ::: " + "Dinero actual: "+managerUsuario.devolverIntValue("dinero",managerUsuario.usuarioConectado)+"€");
 
         for (int i = 0; i <lista.size() ; i++) {
 
