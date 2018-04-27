@@ -7,8 +7,8 @@ import com.company.view.widget.Menu;
 import com.company.view.widget.TextoColor;
 
 public class MenuUsuario {
-    Menu menu = new Menu(5,1);
-    Menu menuA = new Menu(5,7);
+    Menu menu = new Menu(6,1);
+    Menu menuA = new Menu(2,7);
     Donar donar = new Donar();
     Suscribirse suscribirse = new Suscribirse();
     MisSuscripciones misSuscripciones = new MisSuscripciones();
@@ -44,6 +44,7 @@ public class MenuUsuario {
                     ingresar.start(managerUsuario, managerONG);
                     break;
                 case 6:
+                    new Acceder().start(managerUsuario,managerONG);
                     break;
                 default:
                     new TextoColor().colorError("Opción Inválida");
@@ -81,6 +82,7 @@ public class MenuUsuario {
                     break;
 
                 case 6:
+                    new Acceder().start(managerUsuario,managerONG);
                     break;
 
                 case 7:
