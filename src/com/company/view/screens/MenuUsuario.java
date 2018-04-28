@@ -7,8 +7,8 @@ import com.company.view.widget.Menu;
 import com.company.view.widget.TextoColor;
 
 public class MenuUsuario {
-    Menu menu = new Menu(6,1);
-    Menu menuA = new Menu(2,7);
+    Menu menu = new Menu(7,1);
+    Menu menuA = new Menu(2,8);
     Donar donar = new Donar();
     Suscribirse suscribirse = new Suscribirse();
     MisSuscripciones misSuscripciones = new MisSuscripciones();
@@ -21,7 +21,7 @@ public class MenuUsuario {
     public void startMenuUsuario(ManagerUsuario managerUsuario, ManagerONG managerONG) {
 
         if (managerUsuario.devolverIntValue("admin",managerUsuario.usuarioConectado)==0) {
-            menu.showMenuUsuario("Menu principal", managerUsuario, managerONG, "Realizar Donativo", "Suscribirme", "Mis Suscripciones", "Historial de Donativos", "Ingresar dinero","Salir");
+            menu.showMenuUsuario("Menu principal", managerUsuario, managerONG, "Realizar Donativo", "Suscribirme", "Mis Suscripciones", "Historial de Donativos", "Ingresar dinero","Noticias","Salir");
             opcion = menu.option();
             switch (opcion) {
                 case 1:
@@ -44,6 +44,9 @@ public class MenuUsuario {
                     ingresar.start(managerUsuario, managerONG);
                     break;
                 case 6:
+                    new Noticias().show(managerUsuario,managerONG);
+                    break;
+                case 7:
                     new Acceder().start(managerUsuario,managerONG);
                     break;
                 default:
@@ -55,7 +58,7 @@ public class MenuUsuario {
         }
 
         else {
-            menuA.showMenuUsuario("Menu principal", managerUsuario, managerONG, "Realizar Donativo", "Suscribirme", "Mis Suscripciones", "Historial de Donativos", "Ingresar dinero","Salir");
+            menuA.showMenuUsuario("Menu principal", managerUsuario, managerONG, "Realizar Donativo", "Suscribirme", "Mis Suscripciones", "Historial de Donativos", "Ingresar dinero","Noticias","Salir");
             menuA.show("Panel de administración",  "Gestionar Usuarios", "Gestionar ONGs");
 
             opcion = menuA.option();
@@ -82,14 +85,18 @@ public class MenuUsuario {
                     break;
 
                 case 6:
-                    new Acceder().start(managerUsuario,managerONG);
+                    new Noticias().show(managerUsuario,managerONG);
                     break;
 
                 case 7:
-                    gestionarUsuarios.start(managerUsuario,managerONG);
+                    new Acceder().start(managerUsuario,managerONG);
                     break;
 
                 case 8:
+                    gestionarUsuarios.start(managerUsuario,managerONG);
+                    break;
+
+                case 9:
                     gestionarOng.start(managerUsuario, managerONG);
                     break;
 

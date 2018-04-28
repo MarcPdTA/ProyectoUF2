@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="noticias.xsl"?>
+<noticias>
+    <titulo>Noticias</titulo>
+
+    <noticia>
+        <titulo>Noticia1</titulo>
+        <autor>Autor1</autor>
+        <fecha>28/04/2018 02:35:57</fecha>
+        <body>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac enim eros. Mauris porta vehicula laoreet. Proin dignissim fermentum convallis. Integer eu sollicitudin lorem. Nulla felis dui, tempor eu sagittis ut, elementum ac ex. Sed feugiat quam non purus pellentesque feugiat. Sed non rhoncus turpis. Morbi posuere justo ut magna viverra bibendum. Maecenas a orci nulla. Nullam suscipit imperdiet enim, ut gravida purus hendrerit in. Ut tempor dolor non viverra dapibus. Nulla eu neque sit amet ex condimentum laoreet vitae vel tellus. Nam sodales lectus id nisl fermentum, et sollicitudin neque luctus.</p>
+            <p>Mauris eleifend, enim vel laoreet vehicula, lectus mi ultrices libero, vitae ullamcorper magna sapien at ex. Aliquam tempus a felis eu sodales. Sed elementum, est vel sagittis tempor, turpis elit condimentum eros, sit amet congue sem sapien ut risus. Donec lobortis at ante vel dignissim. Vestibulum pretium diam et leo gravida condimentum. Vestibulum et magna et velit molestie mollis. Fusce elementum egestas sem, nec cursus tellus auctor ut. Donec ac pulvinar lacus. In dignissim quis urna quis vehicula. Vivamus venenatis libero ut lacus lacinia, quis egestas metus fermentum.</p>
+            <p>Praesent eleifend, ex a suscipit efficitur, magna purus commodo arcu, non dictum turpis ex vel ante. Phasellus semper nec turpis eget malesuada. In ut arcu massa. Integer nec ipsum urna. Nullam pellentesque ipsum ut metus dignissim gravida. Nam quis urna nec diam vehicula dapibus sit amet eu justo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit libero sed sapien pulvinar mollis. Nunc non erat non felis vehicula commodo faucibus id erat. Quisque eget facilisis ante. Phasellus accumsan ipsum non velit congue, vel fermentum lacus sodales. Ut vitae tellus vulputate, facilisis nisi ac, convallis est.</p>
+            <p>Nunc urna neque, placerat vel malesuada sed, iaculis in arcu. In blandit dictum turpis, vel blandit justo vulputate bibendum. Integer quis metus ipsum. Aliquam erat volutpat. Nulla hendrerit a metus ac efficitur. Aenean lorem odio, bibendum non pretium at, bibendum id arcu. Proin dictum efficitur metus sodales auctor. Morbi tristique quam et gravida tempor. Vestibulum at sem non ipsum feugiat eleifend. Nullam pretium vitae felis in lobortis. Nam mollis neque vel sem sodales fermentum. Suspendisse porta facilisis sem, nec aliquet velit elementum at.</p>
+        </body>
+    </noticia>
+
+    <noticia>
+        <titulo>Noticia2</titulo>
+        <autor>Autor2</autor>
+        <fecha>22/01/2018 01:45:27</fecha>
+        <body>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac enim eros. Mauris porta vehicula laoreet. Proin dignissim fermentum convallis. Integer eu sollicitudin lorem. Nulla felis dui, tempor eu sagittis ut, elementum ac ex. Sed feugiat quam non purus pellentesque feugiat. Sed non rhoncus turpis. Morbi posuere justo ut magna viverra bibendum. Maecenas a orci nulla. Nullam suscipit imperdiet enim, ut gravida purus hendrerit in. Ut tempor dolor non viverra dapibus. Nulla eu neque sit amet ex condimentum laoreet vitae vel tellus. Nam sodales lectus id nisl fermentum, et sollicitudin neque luctus.</p>
+            <p>Mauris eleifend, enim vel laoreet vehicula, lectus mi ultrices libero, vitae ullamcorper magna sapien at ex. Aliquam tempus a felis eu sodales. Sed elementum, est vel sagittis tempor, turpis elit condimentum eros, sit amet congue sem sapien ut risus. Donec lobortis at ante vel dignissim. Vestibulum pretium diam et leo gravida condimentum. Vestibulum et magna et velit molestie mollis. Fusce elementum egestas sem, nec cursus tellus auctor ut. Donec ac pulvinar lacus. In dignissim quis urna quis vehicula. Vivamus venenatis libero ut lacus lacinia, quis egestas metus fermentum.</p>
+            <p>Praesent eleifend, ex a suscipit efficitur, magna purus commodo arcu, non dictum turpis ex vel ante. Phasellus semper nec turpis eget malesuada. In ut arcu massa. Integer nec ipsum urna. Nullam pellentesque ipsum ut metus dignissim gravida. Nam quis urna nec diam vehicula dapibus sit amet eu justo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit libero sed sapien pulvinar mollis. Nunc non erat non felis vehicula commodo faucibus id erat. Quisque eget facilisis ante. Phasellus accumsan ipsum non velit congue, vel fermentum lacus sodales. Ut vitae tellus vulputate, facilisis nisi ac, convallis est.</p>
+            <p>Nunc urna neque, placerat vel malesuada sed, iaculis in arcu. In blandit dictum turpis, vel blandit justo vulputate bibendum. Integer quis metus ipsum. Aliquam erat volutpat. Nulla hendrerit a metus ac efficitur. Aenean lorem odio, bibendum non pretium at, bibendum id arcu. Proin dictum efficitur metus sodales auctor. Morbi tristique quam et gravida tempor. Vestibulum at sem non ipsum feugiat eleifend. Nullam pretium vitae felis in lobortis. Nam mollis neque vel sem sodales fermentum. Suspendisse porta facilisis sem, nec aliquet velit elementum at.</p>
+        </body>
+    </noticia>
+
+</noticias>
