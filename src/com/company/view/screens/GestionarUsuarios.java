@@ -54,7 +54,7 @@ public class GestionarUsuarios {
                 break;
 
             case 4:
-                if(managerUsuario.cambiarContraseña((new EditText("Indique el username del usuario a modificar").pedirString()),new EditText("Indique la nueva contraseña").pedirString())){
+                if(managerUsuario.cambiarContraseña((new EditText("Indique el username del usuario a modificar").pedirString()),managerUsuario.cifrarPassword(new EditText("Indique la nueva contraseña").pedirString()))){
                     new TextoColor().colorCheck("Contraseña cambiada con éxito");
                 }
                 else{

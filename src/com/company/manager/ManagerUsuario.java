@@ -7,6 +7,7 @@ import com.company.model.Suscripcion;
 import com.company.model.Usuario;
 import com.company.view.widget.EditText;
 
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +24,28 @@ public class ManagerUsuario {
         }
     }
 
-    public boolean verificarUsuario(String username, String contraseña) {
+    public String cifrarPassword(String password){
 
+        try{
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(password.getBytes("UTF-8"));
+            StringBuffer hexString = new StringBuffer();
+
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+
+            return hexString.toString();
+        } catch(Exception ex){
+            throw new RuntimeException(ex);
+        }
+    }
+
+
+    public boolean verificarUsuario(String username, String contraseña) {
+        contraseña=cifrarPassword(contraseña);
         if (Database.get().verificarUsuario(username, contraseña)){
             usuarioConectado=Database.get().usernameToIdUsuario(username);
             return true;

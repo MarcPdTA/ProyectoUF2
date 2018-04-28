@@ -4,9 +4,15 @@ package com.company;
 import com.company.model.Donacion;
 import com.company.model.ONG;
 import com.company.model.Usuario;
+import javafx.util.converter.LocalDateTimeStringConverter;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class Database {
@@ -74,7 +80,7 @@ public class Database {
             stmt.execute("CREATE TABLE IF NOT EXISTS ongs (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,nombre text, pais text);");
             stmt.execute("CREATE TABLE IF NOT EXISTS usuarios (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nombre text, apellido text, usuario text, contraseña text, telefono text, DNI text, correo text, dinero INTEGER, cuenta INTEGER, admin INTEGER DEFAULT 0);");
             stmt.execute("CREATE TABLE IF NOT EXISTS suscripciones (usuarioID INTEGER NOT NULL,ongID INTEGER NOT NULL, dinero INTEGER);");
-            stmt.execute("CREATE TABLE IF NOT EXISTS donaciones (usuarioID INTEGER NOT NULL,ongID INTEGER NOT NULL, dinero INTEGER);");
+            stmt.execute("CREATE TABLE IF NOT EXISTS donaciones (usuarioID INTEGER NOT NULL,ongID INTEGER NOT NULL, dinero INTEGER, fecha text);");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -281,16 +287,13 @@ public class Database {
                 ResultSet rs  = pstmt.executeQuery();
 
                 while (rs.next()) {
+                    return true;
 
-                    if(rs.getString("usuario").equals(username)){
-                        return true;
-                    }
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
                 return false;
             }
-            return true;
         }
 
         return false;
@@ -313,12 +316,18 @@ public class Database {
     }
 
     public boolean insertDonacion(int usuarioID, int ongID,int dinero) {
-        String sql = "INSERT INTO donaciones(usuarioID, ongID, dinero) VALUES(?,?,?)";
+        String sql = "INSERT INTO donaciones(usuarioID, ongID, dinero, fecha) VALUES(?,?,?,?)";
         if(suficienteDinero(usuarioID,dinero)){
+
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            Date today = Calendar.getInstance().getTime();
+            String fecha = df.format(today);
+
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, usuarioID);
                 pstmt.setInt(2, ongID);
                 pstmt.setInt(3, dinero);
+                pstmt.setString(4,fecha);
 
                 pstmt.executeUpdate();
                 retirarDinero(usuarioID,dinero);
@@ -540,7 +549,7 @@ public class Database {
                 usuario.DNI = rs.getString("DNI");
                 usuario.correo = rs.getString("correo");
                 usuario.dinero = rs.getInt("dinero");
-                usuario.cuenta=rs.getInt("cuenta");
+                usuario.cuenta=rs.getLong("cuenta");
                 usuario.admin = rs.getInt("admin");
 
                 resultado.add(usuario);
@@ -619,6 +628,7 @@ public class Database {
                 donacion.usuarioID=rs.getInt("usuarioID");
                 donacion.ongID=rs.getInt("ongID");
                 donacion.dinero=rs.getInt("dinero");
+                donacion.fecha=rs.getString("fecha");
 
                 resultado.add(donacion);
             }
@@ -651,6 +661,8 @@ public class Database {
         }
         return resultado;
     }
+
+
 
 }
 

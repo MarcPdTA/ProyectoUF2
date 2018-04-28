@@ -14,7 +14,7 @@ public class Registro {
 
         String nombre = new EditText("Nombre: ").pedirString();
         String apellido = new EditText("Apellidos: ").pedirString();
-        String contraseña = new EditText("Contraseña: ").pedirString();
+        String contraseña = managerUsuario.cifrarPassword(new EditText("Contraseña: ").pedirString());
         String usuario = new EditText("Nombre de usuario: ").pedirString();
         String telefono = new EditText("Telefono: ").pedirString();
         String DNI = new EditText("DNI: ").pedirString();
@@ -23,9 +23,10 @@ public class Registro {
         long cuenta = new EditText("Cuenta bancaria: ").pedirLong();
 
         managerUsuario.crearUsuario(nombre,apellido,usuario,contraseña,telefono,DNI,correo,dinero,cuenta);
-
-        new Acceso().start(managerUsuario, managerONG);
-
+        if(managerUsuario.usuarioConectado==0) {
+            new Acceso().start(managerUsuario, managerONG);
+        }
+        else {new MenuUsuario().startMenuUsuario(managerUsuario,managerONG);}
     }
 
 

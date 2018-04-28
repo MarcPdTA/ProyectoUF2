@@ -57,10 +57,18 @@ public class EditText {
 
     public long pedirLong(){
 
-        long numero=0;
+        long numero;
 
-        return numero;
+        do{
+            System.out.println(text);
+            try{
+                numero=Long.parseLong(scanner.nextLine());
+                return numero;
+            }catch (Exception exception){
+                new TextoColor().colorError("Número inválido");
+            }
 
+        }while (true);
 
     }
 
