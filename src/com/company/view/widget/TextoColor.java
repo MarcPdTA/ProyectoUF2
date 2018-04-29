@@ -15,4 +15,10 @@ public class TextoColor {
         String textoF = ("\033[32;1m" + "✓ " + text + " ✓ " + "\033[0m"+"\n");
         System.out.println(textoF);
     }
+
+    public void colorWarning(String text){
+
+        String textoF = ("\033[33;1m" + "⚠  " + text + " ⚠ " + "\033[0m"+"\n");
+        System.out.println(textoF);
+    }
 }
