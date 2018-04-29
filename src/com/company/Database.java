@@ -708,7 +708,6 @@ public class Database {
                 mensaje.leido = rs.getInt("leido");
                 mensaje.fecha= rs.getString("fecha");
 
-
                 resultado.add(mensaje);
             }
         } catch (SQLException e) {
