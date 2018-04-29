@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.manager.ManagerMensajes;
 import com.company.manager.ManagerONG;
 import com.company.manager.ManagerUsuario;
 import com.company.model.ONG;
@@ -17,8 +18,8 @@ public class Main {
 
         ManagerUsuario managerUsuario = new ManagerUsuario();
         ManagerONG managerONG = new ManagerONG();
-
-        new Acceso().start(managerUsuario, managerONG);
+        ManagerMensajes managerMensajes = new ManagerMensajes();
+        new Acceso().start(managerUsuario, managerONG,managerMensajes);
 
     }
 

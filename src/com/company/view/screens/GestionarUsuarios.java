@@ -1,5 +1,6 @@
 package com.company.view.screens;
 
+import com.company.manager.ManagerMensajes;
 import com.company.manager.ManagerONG;
 import com.company.manager.ManagerUsuario;
 import com.company.view.widget.EditText;
@@ -12,9 +13,9 @@ public class GestionarUsuarios {
     Menu menu = new Menu(12,1);
 
 
-    public void start(ManagerUsuario managerUsuario, ManagerONG managerONG){
+    public void start(ManagerUsuario managerUsuario, ManagerONG managerONG,ManagerMensajes managerMensajes){
 
-        menu.showMenuUsuario("Panel de control de usuarios", managerUsuario, managerONG, "Cambiar nombre", "Cambiar apellido", "Cambiar username", "Cambiar contraseña", "Cambiar DNI","Cambiar correo","Cambiar teléfono","Borrar Usuario","Crear Usuario","Conceder permisos de Administrador","Listar usuarios","Volver al menú");
+        menu.showMenuUsuario("Panel de control de usuarios", managerUsuario, managerONG,managerMensajes, "Cambiar nombre", "Cambiar apellido", "Cambiar username", "Cambiar contraseña", "Cambiar DNI","Cambiar correo","Cambiar teléfono","Borrar Usuario","Crear Usuario","Conceder permisos de Administrador","Listar usuarios","Volver al menú");
 
         switch (menu.option()) {
             case 1:
@@ -25,7 +26,7 @@ public class GestionarUsuarios {
                     new TextoColor().colorError("No existe un usuario con ese username");
                 }
                 new EditText("Pulse intro para continuar").esperar();
-                new GestionarUsuarios().start(managerUsuario,managerONG);
+                new GestionarUsuarios().start(managerUsuario,managerONG,managerMensajes);
 
                 break;
 
@@ -37,7 +38,7 @@ public class GestionarUsuarios {
                     new TextoColor().colorError("No existe un usuario con ese username");
                 }
                 new EditText("Pulse intro para continuar").esperar();
-                new GestionarUsuarios().start(managerUsuario,managerONG);
+                new GestionarUsuarios().start(managerUsuario,managerONG,managerMensajes);
 
                 break;
 
@@ -49,7 +50,7 @@ public class GestionarUsuarios {
                     new TextoColor().colorError("No existe un usuario con ese username");
                 }
                 new EditText("Pulse intro para continuar").esperar();
-                new GestionarUsuarios().start(managerUsuario,managerONG);
+                new GestionarUsuarios().start(managerUsuario,managerONG,managerMensajes);
 
                 break;
 
@@ -61,7 +62,7 @@ public class GestionarUsuarios {
                     new TextoColor().colorError("No existe un usuario con ese username");
                 }
                 new EditText("Pulse intro para continuar").esperar();
-                new GestionarUsuarios().start(managerUsuario,managerONG);
+                new GestionarUsuarios().start(managerUsuario,managerONG,managerMensajes);
 
                 break;
 
@@ -73,7 +74,7 @@ public class GestionarUsuarios {
                     new TextoColor().colorError("No existe un usuario con ese username");
                 }
                 new EditText("Pulse intro para continuar").esperar();
-                new GestionarUsuarios().start(managerUsuario,managerONG);
+                new GestionarUsuarios().start(managerUsuario,managerONG,managerMensajes);
 
                 break;
             case 6:
@@ -84,7 +85,7 @@ public class GestionarUsuarios {
                     new TextoColor().colorError("No existe un usuario con ese username");
                 }
                 new EditText("Pulse intro para continuar").esperar();
-                new GestionarUsuarios().start(managerUsuario,managerONG);
+                new GestionarUsuarios().start(managerUsuario,managerONG,managerMensajes);
 
                 break;
             case 7:
@@ -95,7 +96,7 @@ public class GestionarUsuarios {
                     new TextoColor().colorError("No existe un usuario con ese username");
                 }
                 new EditText("Pulse intro para continuar").esperar();
-                new GestionarUsuarios().start(managerUsuario,managerONG);
+                new GestionarUsuarios().start(managerUsuario,managerONG,managerMensajes);
 
                 break;
             case 8:
@@ -106,16 +107,16 @@ public class GestionarUsuarios {
                     new TextoColor().colorError("No existe un usuario con ese username");
                 }
                 new EditText("Pulse intro para continuar").esperar();
-                new GestionarUsuarios().start(managerUsuario,managerONG);
+                new GestionarUsuarios().start(managerUsuario,managerONG,managerMensajes);
 
                 break;
 
             case 9:
-                new Registro().start(managerUsuario,managerONG);
+                new Registro().start(managerUsuario,managerONG,managerMensajes);
                 new TextoColor().colorCheck("Usuario creado con éxito");
 
                 new EditText("Pulse intro para continuar").esperar();
-                new GestionarUsuarios().start(managerUsuario,managerONG);
+                new GestionarUsuarios().start(managerUsuario,managerONG,managerMensajes);
                 break;
 
 
@@ -127,24 +128,24 @@ public class GestionarUsuarios {
                     new TextoColor().colorError("No existe un usuario con ese username");
                 }
                 new EditText("Pulse intro para continuar").esperar();
-                new GestionarUsuarios().start(managerUsuario,managerONG);
+                new GestionarUsuarios().start(managerUsuario,managerONG,managerMensajes);
 
                 break;
 
             case 11:
                 new Tabla().tablaUsuarios(managerUsuario);
                 new EditText("Pulse intro para continuar").esperar();
-                new GestionarUsuarios().start(managerUsuario,managerONG);
+                new GestionarUsuarios().start(managerUsuario,managerONG,managerMensajes);
                 break;
 
             case 12:
-                new MenuUsuario().startMenuUsuario(managerUsuario, managerONG);
+                new MenuUsuario().startMenuUsuario(managerUsuario, managerONG,managerMensajes);
                 break;
 
             default:
                 new TextoColor().colorError("Opción Inválida");
                 new EditText("Pulse intro para continuar").esperar();
-                new GestionarUsuarios().start(managerUsuario, managerONG);
+                new GestionarUsuarios().start(managerUsuario, managerONG,managerMensajes);
 
                 break;
         }

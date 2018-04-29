@@ -2,6 +2,7 @@ package com.company;
 
 
 import com.company.model.Donacion;
+import com.company.model.Mensaje;
 import com.company.model.ONG;
 import com.company.model.Usuario;
 import javafx.util.converter.LocalDateTimeStringConverter;
@@ -81,6 +82,7 @@ public class Database {
             stmt.execute("CREATE TABLE IF NOT EXISTS usuarios (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nombre text, apellido text, usuario text, contraseña text, telefono text, DNI text, correo text, dinero INTEGER, cuenta INTEGER, admin INTEGER DEFAULT 0);");
             stmt.execute("CREATE TABLE IF NOT EXISTS suscripciones (usuarioID INTEGER NOT NULL,ongID INTEGER NOT NULL, dinero INTEGER);");
             stmt.execute("CREATE TABLE IF NOT EXISTS donaciones (usuarioID INTEGER NOT NULL,ongID INTEGER NOT NULL, dinero INTEGER, fecha text);");
+            stmt.execute("CREATE TABLE IF NOT EXISTS mensajes (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, emisorID INTEGER, receptorID INTEGER, mensaje text, leido INTEGER DEFAULT 0,fecha text);");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -662,8 +664,115 @@ public class Database {
         return resultado;
     }
 
+    public boolean enviarMensaje(int emisorID, String receptor, String mensaje){
+
+        if(existeUsuario(receptor)){
+            String sql = "INSERT INTO mensajes(emisorID, receptorID, mensaje, fecha) VALUES(?,?,?,?)";
+
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            Date today = Calendar.getInstance().getTime();
+            String fecha = df.format(today);
+
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, emisorID);
+                pstmt.setInt(2, usernameToIdUsuario(receptor));
+                pstmt.setString(3, mensaje);
+                pstmt.setString(4, fecha);
+                pstmt.executeUpdate();
+                return true;
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+
+        }
+
+        return false;
+    }
+
+    public List<Mensaje> selectMensajesUsuario(int receptorID){
+        String sql = "SELECT * FROM mensajes WHERE receptorID ="+receptorID;
+
+        List<Mensaje> resultado = new ArrayList<>();
+
+        try (Statement stmt  = conn.createStatement()){
+
+            ResultSet rs  = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                Mensaje mensaje = new Mensaje();
+                mensaje.id = rs.getInt("id");
+                mensaje.receptorID = rs.getInt("receptorID");
+                mensaje.emisorID = rs.getInt("emisorID");
+                mensaje.mensaje = rs.getString("mensaje");
+                mensaje.leido = rs.getInt("leido");
+                mensaje.fecha= rs.getString("fecha");
 
 
+                resultado.add(mensaje);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return resultado;
+    }
+
+    public List<Mensaje> selectMensajesNoLeidosUsuario(int receptorID){
+        String sql = "SELECT * FROM mensajes WHERE receptorID ="+receptorID+" AND leido=0";
+
+        List<Mensaje> resultado = new ArrayList<>();
+
+        try (Statement stmt  = conn.createStatement()){
+
+            ResultSet rs  = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                Mensaje mensaje = new Mensaje();
+                mensaje.id = rs.getInt("id");
+                mensaje.receptorID = rs.getInt("receptorID");
+                mensaje.emisorID = rs.getInt("emisorID");
+                mensaje.mensaje = rs.getString("mensaje");
+                mensaje.leido = rs.getInt("leido");
+                mensaje.fecha= rs.getString("fecha");
+
+
+                resultado.add(mensaje);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return resultado;
+    }
+
+    public List<Mensaje> marcarMensajesLeidos(int receptorID){
+        String sql = "UPDATE mensajes SET leido = 1 WHERE receptorID ="+receptorID;
+
+        List<Mensaje> resultado = new ArrayList<>();
+
+        try (Statement stmt  = conn.createStatement()){
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return resultado;
+    }
+    public int contarMensajesNoLeidos(int receptorID){
+        String sql = "SELECT COUNT(*) AS cuenta FROM mensajes WHERE receptorID="+receptorID+" AND leido=0";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                return rs.getInt("cuenta");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+        return 0;
+    }
 }
 
 

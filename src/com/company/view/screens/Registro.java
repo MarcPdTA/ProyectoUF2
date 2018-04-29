@@ -1,16 +1,18 @@
 package com.company.view.screens;
 
 import com.company.Main;
+import com.company.manager.ManagerMensajes;
 import com.company.manager.ManagerONG;
 import com.company.manager.ManagerUsuario;
 import com.company.model.Usuario;
 import com.company.view.widget.EditText;
+import com.company.view.widget.WindowTitle;
 
 public class Registro {
 
 
-    public void start(ManagerUsuario managerUsuario, ManagerONG managerONG) {
-
+    public void start(ManagerUsuario managerUsuario, ManagerONG managerONG,ManagerMensajes managerMensajes) {
+        new WindowTitle().show("Registro");
 
         String nombre = new EditText("Nombre: ").pedirString();
         String apellido = new EditText("Apellidos: ").pedirString();
@@ -24,9 +26,9 @@ public class Registro {
 
         managerUsuario.crearUsuario(nombre,apellido,usuario,contraseña,telefono,DNI,correo,dinero,cuenta);
         if(managerUsuario.usuarioConectado==0) {
-            new Acceso().start(managerUsuario, managerONG);
+            new Acceso().start(managerUsuario, managerONG,managerMensajes);
         }
-        else {new MenuUsuario().startMenuUsuario(managerUsuario,managerONG);}
+        else {new MenuUsuario().startMenuUsuario(managerUsuario,managerONG,managerMensajes);}
     }
 
 
