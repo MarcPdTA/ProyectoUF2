@@ -585,7 +585,6 @@ public class Database {
         return resultado;
     }
 
-
     public int usernameToIdUsuario(String username){
         String sql = "SELECT id FROM usuarios WHERE usuario = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
