@@ -256,6 +256,28 @@ public class Database {
         return false;
     }
 
+    public boolean existeUsuario(int id){
+        String sql = "SELECT id FROM usuarios WHERE id = ?";
+        try (PreparedStatement pstmt  = conn.prepareStatement(sql)){
+
+            pstmt.setInt(1, id);
+            ResultSet rs  = pstmt.executeQuery();
+
+            while (rs.next()) {
+
+                if(rs.getInt("id")==(id)){
+                    return true;
+                }
+            }
+            return false;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return false;
+    }
+
     public boolean insertUsuario(String nombre,String apellido,String username,String contraseña,String telefono,
                                  String DNI, String correo,int dinero, long cuenta) {
         String sql = "INSERT INTO usuarios(nombre, apellido, usuario, contraseña, telefono, DNI, correo, dinero, cuenta) VALUES(?,?,?,?,?,?,?,?,?)";
@@ -771,6 +793,30 @@ public class Database {
 
         }
         return 0;
+    }
+
+    public boolean enviarMensajeGlobal(int emisorID, String mensaje){
+            String sql = "INSERT INTO mensajes(emisorID, receptorID, mensaje, fecha) VALUES(?,?,?,?)";
+
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            Date today = Calendar.getInstance().getTime();
+            String fecha = df.format(today);
+
+        for (int i = 1; i <=contarUsuarios(); i++) {
+            if (existeUsuario(i)) {
+                try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                    pstmt.setInt(1, emisorID);
+                    pstmt.setInt(2, i);
+                    pstmt.setString(3, mensaje);
+                    pstmt.setString(4, fecha);
+                    pstmt.executeUpdate();
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
 

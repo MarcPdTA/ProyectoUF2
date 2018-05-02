@@ -26,4 +26,8 @@ public class ManagerMensajes {
         return Database.get().contarMensajesNoLeidos(receptorID);
     }
 
+    public boolean enviarMensajeGlobal(int emisorID, String mensaje){
+        return Database.get().enviarMensajeGlobal(emisorID,mensaje);
+    }
+
 }
