@@ -19,7 +19,7 @@ public class Registro {
         String contraseña = managerUsuario.cifrarPassword(new EditText("Contraseña: ").pedirString());
         String usuario = new EditText("Nombre de usuario: ").pedirString();
         String telefono = new EditText("Telefono: ").pedirString();
-        String DNI = new EditText("DNI: ").pedirString();
+        String DNI = new EditText("DNI: ").checkDNI();
         String correo = new EditText("Correo electronico: ").checkEmail();
         int dinero = new EditText("Ingreso inicial: ").pedirInt(0, 1000000000);
         long cuenta = new EditText("Cuenta bancaria: ").pedirLong();
