@@ -3,6 +3,8 @@ package com.company.view.widget;
 import com.company.manager.ManagerUsuario;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EditText {
 
@@ -20,6 +22,16 @@ public class EditText {
                 new TextoColor().colorError("No ha introducido texto");
             }
         }while (mensaje.equals(""));
+        return mensaje;
+    }
+
+    public String[] pedirArrayStrings(int longitud){
+        String[] mensaje = new String[longitud];
+
+        for (int i = 0; i <longitud ; i++) {
+            mensaje[i]=pedirString();
+        }
+
         return mensaje;
     }
 
@@ -47,10 +59,18 @@ public class EditText {
 
     public long pedirLong(){
 
-        long numero=0;
+        long numero;
 
-        return numero;
+        do{
+            System.out.println(text);
+            try{
+                numero=Long.parseLong(scanner.nextLine());
+                return numero;
+            }catch (Exception exception){
+                new TextoColor().colorError("Número inválido");
+            }
 
+        }while (true);
 
     }
 
@@ -63,25 +83,42 @@ public class EditText {
     public String checkEmail(){
         do {
             System.out.println(text);
-        String email = scanner.nextLine();
+            String email = scanner.nextLine();
+            Pattern patron = Pattern.compile("^.+@[A-Za-z0-9]+"+Pattern.quote(".")+"[a-z]{1,4}$");
+            Matcher matcher = patron.matcher(email);
 
-    for (int i = 0; i < email.length(); i++) {
-        if (email.charAt(i) == '@' && email.charAt(0) != '@') {
-            for (int j = i+1; j < email.length(); j++) {
-                //falta comprovar gmail o hotmail
-                if (email.charAt(j) == '.') {
-                    if (email.charAt(j + 1) == 'c' && email.charAt(j + 2) == 'o' && email.charAt(j + 3) == 'm'
-                            || email.charAt(j + 1) == 'n' && email.charAt(j + 2) == 'e' && email.charAt(j + 3) == 't') {
-                        return email;
-                    }
-                }
+            if(matcher.find()){
+                return email;
             }
-        }
-
-    }
+//    for (int i = 0; i < email.length(); i++) {
+//        if (email.charAt(i) == '@' && email.charAt(0) != '@') {
+//            for (int j = i+1; j < email.length(); j++) {
+//                //falta comprobar gmail o hotmail
+//                if (email.charAt(j) == '.') {
+//                    if (email.charAt(j + 1) == 'c' && email.charAt(j + 2) == 'o' && email.charAt(j + 3) == 'm'
+//                            || email.charAt(j + 1) == 'n' && email.charAt(j + 2) == 'e' && email.charAt(j + 3) == 't') {
+//                        return email;
+//                    }
+//                }
+//            }
+//        }
+//
+//    }
             new TextoColor().colorError("ERROR!");
-
-}while (true);
+        }while (true);
     }
 
+    public String checkDNI() {
+        do {
+            System.out.println(text);
+            String dni = scanner.nextLine();
+            Pattern patron = Pattern.compile("[0-9]{8}[A-Za-z]");
+            Matcher matcher = patron.matcher(dni);
+
+            if (matcher.find()) {
+                return dni;
+            }
+            new TextoColor().colorError("ERROR!");
+        }while(true);
+    }
 }

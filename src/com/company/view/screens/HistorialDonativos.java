@@ -1,24 +1,22 @@
 package com.company.view.screens;
 
+import com.company.manager.ManagerMensajes;
 import com.company.manager.ManagerONG;
 import com.company.manager.ManagerUsuario;
-import com.company.view.widget.EditText;
-import com.company.view.widget.Menu;
+import com.company.view.widget.*;
 
 public class HistorialDonativos {
-    public void start(ManagerUsuario managerUsuario, ManagerONG managerONG) {
-        if(managerUsuario.usuarioConectado.donaciones[0]!=null) {
-            new Menu(managerUsuario.usuarioConectado.donaciones.length,1).show("\nHistorial Donativos", managerUsuario.usuarioConectado.donaciones);
-            new EditText("Pulse INTRO para continuar").esperar();
+
+    public void start(ManagerUsuario managerUsuario, ManagerONG managerONG,ManagerMensajes managerMensajes) {
+        if(managerUsuario.donacionesUsuarioConectado().size()!=0) {
+            new WindowTitle().show("Historial de donativos");
+            new Tabla().tablaDonaciones(managerUsuario, managerONG);
+            new EditText("Pulse intro para continuar").esperar();
         }
         else {
-            System.out.println("No has realizado ninguna donación\n");
+            new TextoColor().colorWarning("No hay ninguna donación en el historial");
             new EditText("Pulse INTRO para continuar").esperar();
         }
-        new MenuUsuario().startMenuUsuario(managerUsuario, managerONG);
+        new MenuUsuario().startMenuUsuario(managerUsuario, managerONG, managerMensajes);
     }
-
-
-
-
 }

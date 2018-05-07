@@ -1,25 +1,22 @@
 package com.company.view.screens;
 
+import com.company.manager.ManagerMensajes;
 import com.company.manager.ManagerONG;
 import com.company.manager.ManagerUsuario;
-import com.company.view.widget.EditText;
-import com.company.view.widget.Menu;
+import com.company.view.widget.*;
 
 public class MisSuscripciones {
-    public void start(ManagerUsuario managerUsuario, ManagerONG managerONG) {
-        if(managerUsuario.usuarioConectado.suscripciones[0]!=null) {
-            new Menu(managerUsuario.usuarioConectado.suscripciones.length,1).show("\nMis suscripciones", managerUsuario.usuarioConectado.suscripciones);
-            System.out.println(" ");
-            new EditText("Pulse INTRO para continuar").esperar();
-        }
-        else {
-            System.out.println("No te has suscrito a ninguna ONG\n");
-            System.out.println(" ");
-            new EditText("Pulse INTRO para continuar").esperar();
-        }
 
-        new MenuUsuario().startMenuUsuario(managerUsuario, managerONG);
+    public void start(ManagerUsuario managerUsuario, ManagerONG managerONG,ManagerMensajes managerMensajes) {
+        if(managerUsuario.suscripcionesUsuarioConectado().size()!=0) {
+            new WindowTitle().show("Mis suscripciones");
+            new Tabla().tablaSuscripciones(managerUsuario, managerONG);
+            new EditText("Pulse INTRO para continuar").esperar();
+
+        }else {
+            new TextoColor().colorWarning("No hay ninguna suscripción activa");
+            new EditText("Pulse INTRO para continuar").esperar();
+        }
+        new MenuUsuario().startMenuUsuario(managerUsuario, managerONG,managerMensajes);
     }
-
-
 }

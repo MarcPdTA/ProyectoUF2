@@ -1,53 +1,42 @@
 package com.company.manager;
 
+import com.company.Database;
 import com.company.model.ONG;
+import com.company.model.Usuario;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ManagerONG {
-    public ONG[] ONGs = new ONG[100];
-    public void crearONG(String nombre, String ... nombresPais){
-        if(!ONGExiste(nombre)) {
-            ONG ong = new ONG();
-            ong.nombre = nombre;
-            ong.nombresPais = nombresPais;
 
-            for (int i = 0; i < ONGs.length; i++) {
-                if (ONGs[i] == null) {
-                    ong.id = i;
-                    ONGs[i] = ong;
-                    break;
-                }
-
-            }
-        }
-    }
-
-    public boolean ONGExiste(String nombre) {
-        for (int i = 0; i <ONGs.length ; i++) {
-            if(ONGs[i]!=null && ONGs[i].nombre.equals(nombre)){
-                return true;
-            }
+    public boolean crearONG(String nombre, String pais) {
+        if (!Database.get().existeONG(nombre)) {
+            return Database.get().insertONG(nombre, pais);
         }
         return false;
     }
 
-    public int cantidadONG(){
-        for (int i = 0; i <ONGs.length ; i++) {
 
-            if(ONGs[i]== null){
-                return i;
-            }
-        }
-        return 0;
+    public boolean cambiarNombre(String nombreViejo, String nombreNuevo) {
+        return Database.get().cambiarNombreONG(nombreViejo, nombreNuevo);
     }
 
-    public String[] ONGNombres() {
-        String[] nombres = new String[cantidadONG()];
 
-        for (int i = 0; i <ONGs.length ; i++) {
-            if(ONGs[i]!=null ){
-                nombres[i]=ONGs[i].nombre;
-            }
-        }
-        return nombres;
+    public boolean borrarONG(String nombreONG) {
+        return Database.get().borrarONG(nombreONG);
+    }
+
+    public List<ONG> listarONGs() {
+        return Database.get().selectTodasONGS();
+
+    }
+
+    public int contarONGs(){
+        return Database.get().contarONGs();
+    }
+
+    public String idToStringONG(int id){
+        return Database.get().id_nombreONG(id);
     }
 }

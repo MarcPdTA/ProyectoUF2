@@ -1,7 +1,11 @@
 package com.company.view.widget;
 
+import com.company.manager.ManagerMensajes;
 import com.company.manager.ManagerONG;
 import com.company.manager.ManagerUsuario;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Menu {
 
@@ -13,8 +17,10 @@ public class Menu {
         this.inicio=inicio;
     }
 
-    public void show(String titulo,String ...lista){
-        System.out.println(titulo+"\n");
+    public void show(String titulo, String ...lista){
+        WindowTitle windowTitle = new WindowTitle();
+
+        windowTitle.show(titulo);
         for (int i = 0; i <lista.length ; i++) {
 
             if(lista[i]!=null)
@@ -28,8 +34,9 @@ public class Menu {
         return (new EditText("Opción: ").pedirInt(1,longitud+(inicio-1)));
     }
 
-    public void showMenuUsuario(String titulo,ManagerUsuario managerUsuario, ManagerONG managerONG, String ...lista){
-        System.out.println(titulo + " ::: " + managerUsuario.usuarioConectado.usuario + " ::: " + "Dinero actual: "+managerUsuario.usuarioConectado.dinero+"€\n");
+    public void showMenuUsuario(String titulo, ManagerUsuario managerUsuario, ManagerONG managerONG, ManagerMensajes managerMensajes, String ...lista){
+        WindowTitle windowTitle = new WindowTitle();
+        windowTitle.show(titulo + " ::: " + managerUsuario.devolverStringValue("usuario",managerUsuario.usuarioConectado) + " ::: " + "Dinero actual: "+managerUsuario.devolverIntValue("dinero",managerUsuario.usuarioConectado)+"€"+ " ::: " + "Mensajes no leídos: "+managerMensajes.contarMensajesNoLeidos(managerUsuario.usuarioConectado));
 
         for (int i = 0; i <lista.length ; i++) {
 
@@ -38,6 +45,31 @@ public class Menu {
         }
         System.out.println("");
     }
+
+    public void show(String titulo, List<String> lista){
+        WindowTitle windowTitle = new WindowTitle();
+        windowTitle.show(titulo);
+
+        for (int i = 0; i <lista.size() ; i++) {
+
+            if(lista.get(i)!=null)
+                System.out.println(i+1+(inicio-1) + ") " +lista.get(i));
+        }
+        System.out.println("");
+    }
+
+    public void showMenuUsuario(String titulo, ManagerUsuario managerUsuario, ManagerONG managerONG, ManagerMensajes managerMensajes, List<String> lista){
+        WindowTitle windowTitle = new WindowTitle();
+        windowTitle.show(titulo + " ::: " + managerUsuario.devolverStringValue("usuario",managerUsuario.usuarioConectado) + " ::: " + "Dinero actual: "+managerUsuario.devolverIntValue("dinero",managerUsuario.usuarioConectado)+"€"+ " ::: " + "Mensajes no leídos: "+managerMensajes.contarMensajesNoLeidos(managerUsuario.usuarioConectado));
+
+        for (int i = 0; i <lista.size() ; i++) {
+
+            if(lista.get(i)!=null)
+                System.out.println(i+1+ ") " +lista.get(i));
+        }
+        System.out.println("");
+    }
 }
+
 
 

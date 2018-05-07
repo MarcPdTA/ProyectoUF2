@@ -1,5 +1,6 @@
 package com.company.view.screens;
 
+import com.company.manager.ManagerMensajes;
 import com.company.manager.ManagerONG;
 import com.company.manager.ManagerUsuario;
 import com.company.model.Usuario;
@@ -9,8 +10,7 @@ import com.company.view.widget.TextoColor;
 public class Acceder {
     String usuario;
     String contraseña;
-    public void start(ManagerUsuario managerUsuario, ManagerONG managerONG){
-        boolean noValido;
+    public void start(ManagerUsuario managerUsuario, ManagerONG managerONG,ManagerMensajes managerMensajes){
 
         MenuUsuario menuUsuario = new MenuUsuario();
         do {
@@ -24,7 +24,7 @@ public class Acceder {
             }
         } while(!managerUsuario.verificarUsuario(usuario,contraseña));
 
-            menuUsuario.startMenuUsuario(managerUsuario, managerONG);
+            menuUsuario.startMenuUsuario(managerUsuario, managerONG, managerMensajes);
 
 
 
